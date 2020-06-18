@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+repositories {
+    mavenCentral()
+}
+
 android {
     compileSdkVersion 28
 
@@ -13,4 +17,6 @@ android {
 
 dependencies {
     implementation ':Corona@aar'
+    compile "org.java-websocket:Java-WebSocket:1.5.1"
+//    compile 'com.koushikdutta.async:androidasync:2.+'
 }

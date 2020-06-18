@@ -9,8 +9,8 @@
 // e.g. [Lua] require "plugin.solarwebsockets"
 package plugin.solarwebsockets;
 
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+
+import android.util.Log;
 
 import com.ansca.corona.CoronaActivity;
 import com.ansca.corona.CoronaEnvironment;
@@ -22,6 +22,7 @@ import com.naef.jnlua.JavaFunction;
 import com.naef.jnlua.LuaState;
 import com.naef.jnlua.NamedJavaFunction;
 
+import org.java_websocket.WebSocket;
 
 /**
  * Implements the Lua interface for a Corona plugin.
@@ -32,10 +33,12 @@ import com.naef.jnlua.NamedJavaFunction;
 @SuppressWarnings("WeakerAccess")
 public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 	/** Lua registry ID to the Lua function to be called when the ad request finishes. */
-	private int fListener;
+	public static int fListener;
 
 	/** This corresponds to the event name, e.g. [Lua] event.name */
-	private static final String EVENT_NAME = "pluginlibraryevent";
+	public static final String EVENT_NAME = "pluginlibraryevent";
+
+	private Server server;
 
 
 	/**
@@ -72,7 +75,10 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		// Register this plugin into Lua with the following functions.
 		NamedJavaFunction[] luaFunctions = new NamedJavaFunction[] {
 			new InitWrapper(),
-			new ShowWrapper(),
+			new StartServerWrapper(),
+			new KillServerWrapper(),
+			new SendWrapper(),
+			new SendAllWrapper(),
 		};
 		String libName = L.toString( 1 );
 		L.register(libName, luaFunctions);
@@ -189,6 +195,58 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		return 0;
 	}
 
+
+	public int killServer(LuaState L) {
+
+		if (server != null) {
+			try {
+				server.stop();
+			} catch (Exception e) {
+
+			}
+		}
+
+		return 0;
+	}
+
+	public int send(LuaState L) {
+
+		if (server != null) {
+			try {
+				Integer clientId = L.checkInteger( 1 );
+				WebSocket conn = null;
+				for (int i = 0; i < server.clients.size(); i++) {
+					if (server.clients.get(i).id.equals(clientId)) {
+						conn = server.clients.get(i).conn;
+						break;
+					}
+				}
+				if (conn != null) {
+					String message = L.checkString( 2 );
+					conn.send(message);
+				}
+			} catch (Exception e) {
+
+			}
+		}
+
+		return 0;
+	}
+
+	public int sendAll(LuaState L) {
+
+		if (server != null) {
+			try {
+				String message = L.checkString( 1 );
+				server.broadcast(message);
+			} catch (Exception e) {
+
+			}
+		}
+
+		return 0;
+	}
+
 	/**
 	 * The following Lua function has been called:  library.show( word )
 	 * <p>
@@ -206,56 +264,28 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		}
 
 		// Fetch the first argument from the called Lua function.
-		String word = L.checkString( 1 );
-		if ( null == word ) {
-			word = "corona";
+		Integer desiredPort = null;
+		try {
+			desiredPort = L.checkInteger( 1 );
+		} catch (Exception e) {
+
+		}
+		if (server != null) {
+			try {
+				server.stop();
+			} catch (Exception e) {
+
+			}
 		}
 
-		// Create web view on the main UI thread.
-		final String url = "http://dictionary.reference.com/browse/" + word;
-		activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				// Fetch a reference to the Corona activity.
-				// Note: Will be null if the end-user has just backed out of the activity.
-				CoronaActivity activity = CoronaEnvironment.getCoronaActivity();
-				if (activity == null) {
-					return;
-				}
+		try {
+			server = Server.start(desiredPort);
+		} catch (Exception e) {
 
-				// Create and set up the web view.
-				WebView view = new WebView(activity);
-
-				// Prevent redirect which causes an external browser to be launched
-				// because some sites detect phone/tablet and redirect.
-				view.setWebViewClient(new WebViewClient() {
-					@Override
-					public boolean shouldOverrideUrlLoading(WebView view, String url) {
-						return false;
-					}
-				});
-
-				// Display the web view.
-				activity.getOverlayView().addView(view);
-				view.loadUrl( url );
-			}
-		} );
+		}
 
 
-		// This will send event via dispatchEvent in 5 seconds. Not that dispatchEvent is called from
-		// background thread, but it will use runtime dispatcher to select proper thread for Lua message dispatch
-		(new Thread() {
-			@Override
-			public void run() {
-				// Sleep for 5 seconds
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException ignored) {}
-
-				// dispatch message!
-				dispatchEvent("Hello!");
-			}
-		}).start();
+//		dispatchEvent("Hello!");
 
 		return 0;
 	}
@@ -288,7 +318,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 
 	/** Implements the library.show() Lua function. */
 	@SuppressWarnings("unused")
-	private class ShowWrapper implements NamedJavaFunction {
+	private class StartServerWrapper implements NamedJavaFunction {
 		/**
 		 * Gets the name of the Lua function as it would appear in the Lua script.
 		 * @return Returns the name of the custom Lua function.
@@ -297,7 +327,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		public String getName() {
 			return "startServer";
 		}
-		
+
 		/**
 		 * This method is called when the Lua function is called.
 		 * <p>
@@ -309,6 +339,36 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		@Override
 		public int invoke(LuaState L) {
 			return startServer(L);
+		}
+	}
+	private class KillServerWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "killServer";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return killServer(L);
+		}
+	}
+	private class SendWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "send";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return send(L);
+		}
+	}
+	private class SendAllWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "sendAll";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return sendAll(L);
 		}
 	}
 }

@@ -32,7 +32,7 @@ local function wsListener( event )
         print(event.clientIp)
         print(event.message)
         SolarWebSockets.send(event.clientId,"echo "..event.message)
-        SolarWebSockets.sendAll("some said "..event.message)
+        SolarWebSockets.sendAll("someone said "..event.message)
     end
     if event.name == "leave" then
         print("leave","clients #", #event.clients)
