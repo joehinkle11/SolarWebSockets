@@ -50,13 +50,41 @@ public class Server extends WebSocketServer {
     }
 
     @Override
-    public void onOpen( WebSocket conn, ClientHandshake handshake ) {
+    public void onOpen( final WebSocket conn, ClientHandshake handshake ) {
         System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
         clients.add(new IdentifiableClient(conn));
+
+
+        final Server dis = this;
+        CoronaEnvironment.getCoronaActivity().getRuntimeTaskDispatcher().send(new CoronaRuntimeTask() {
+            @Override
+            public void executeUsing(CoronaRuntime runtime) {
+                LuaState L = runtime.getLuaState();
+
+                CoronaLua.newEvent( L, LuaLoader.EVENT_NAME );
+
+                L.pushString("join");
+                L.setField(-2, "name");
+
+                dis.buildClientList(L);
+
+                L.pushInteger(conn.getRemoteSocketAddress().getPort());
+                L.setField(-2, "clientId");
+
+
+                L.pushString(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+                L.setField(-2, "clientIp");
+
+                try {
+                    CoronaLua.dispatchEvent( L, LuaLoader.fListener, 0 );
+                } catch (Exception ignored) {
+                }
+            }
+        } );
     }
 
     @Override
-    public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
+    public void onClose( final WebSocket conn, int code, String reason, boolean remote ) {
         System.out.println( conn + " has left the room!" );
         for (int i = 0; i < clients.size(); i++) {
             if (clients.get(i).id == conn.getRemoteSocketAddress().getPort()) {
@@ -64,6 +92,34 @@ public class Server extends WebSocketServer {
                 break;
             }
         }
+        final Integer clientId = conn.getRemoteSocketAddress().getPort();
+        final String clientIp = conn.getRemoteSocketAddress().getAddress().getHostAddress();
+        final Server dis = this;
+        CoronaEnvironment.getCoronaActivity().getRuntimeTaskDispatcher().send(new CoronaRuntimeTask() {
+            @Override
+            public void executeUsing(CoronaRuntime runtime) {
+                LuaState L = runtime.getLuaState();
+
+                CoronaLua.newEvent( L, LuaLoader.EVENT_NAME );
+
+                L.pushString("leave");
+                L.setField(-2, "name");
+
+                dis.buildClientList(L);
+
+                L.pushInteger(clientId);
+                L.setField(-2, "clientId");
+
+
+                L.pushString(clientIp);
+                L.setField(-2, "clientIp");
+
+                try {
+                    CoronaLua.dispatchEvent( L, LuaLoader.fListener, 0 );
+                } catch (Exception ignored) {
+                }
+            }
+        } );
     }
 
     @Override
@@ -129,6 +185,27 @@ public class Server extends WebSocketServer {
         System.out.println("Server started!");
         setConnectionLostTimeout(0);
         setConnectionLostTimeout(100);
+    }
+
+    private void buildClientList(LuaState L) {
+        L.newTable(); /* ==> stack: ..., {} */
+
+        // loop through clients to create a lua table
+        for (int j = 0; j < clients.size(); j++) {
+            IdentifiableClient client = clients.get(j);
+            L.pushInteger(j+1); // index starts at 1 for lua, so add 1 from java index
+            L.newTable(); /* ==> stack: ..., {} */
+            L.pushString("clientId");  /* ==> stack: ..., {}, "b" */
+            L.pushInteger(client.id);  /* ==> stack: ..., {}, 1, "hello" */
+            L.setTable(-3); /* ==> stack: ..., {} */
+            L.pushString("clientIp"); /* ==> stack: ..., {}, "b" */
+            L.pushString(client.ip); /* ==> stack: ..., {}, 1, "hello" */
+            L.setTable(-3); /* ==> stack: ..., {} */
+            L.setTable(-3); /* ==> stack: ..., {} */
+        }
+
+        // save to a table/array called clients
+        L.setField(-2, "clients");  /* ==> stack: ... */
     }
 
 }
