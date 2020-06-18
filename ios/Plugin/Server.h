@@ -19,6 +19,7 @@ CORONA_EXPORT int testttt234(void);
 CORONA_EXPORT void server_startServer(void);
 CORONA_EXPORT void server_killServer(void);
 CORONA_EXPORT void server_send(int,const char*);
+CORONA_EXPORT void server_sendAll(const char*);
 
 void server_onJoin(ws_list *l, char *joinerIp, int joinerId);
 void server_onLeave(ws_list *l, char *leaverIp, int leaveId);

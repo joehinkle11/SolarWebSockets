@@ -12,5 +12,6 @@
 int socket_main();
 void sigint_handler(int sig);
 void sendMessageToClient(int socket_id, char *msg);
+void sendMessageToAll(char *msg);
 
 #endif /* Websocket_h */

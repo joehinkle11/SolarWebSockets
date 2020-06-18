@@ -66,7 +66,32 @@ void cleanup_client(void *args) {
 	}
 }
 
+void sendMessageToAll(char *msg) {
+    ws_connection_close status;
 
+    ws_message *m = message_new();
+    m->len = strlen(msg);
+
+    char *temp = malloc( sizeof(char)*(m->len+1) );
+    if (temp == NULL) {
+        raise(SIGINT);
+        return;
+    }
+    memset(temp, '\0', (m->len+1));
+    memcpy(temp, msg, m->len);
+    m->msg = temp;
+    temp = NULL;
+
+    if ( (status = encodeMessage(m)) != CONTINUE) {
+        message_free(m);
+        free(m);
+        return;
+    }
+
+    list_multicast_all(l, m);
+    message_free(m);
+    free(m);
+}
 
 void sendMessageToClient(int socket_id, char *msg) {
     ws_connection_close status;
@@ -84,7 +109,7 @@ void sendMessageToClient(int socket_id, char *msg) {
 
     char *temp = malloc( sizeof(char)*(m->len+1) );
     if (temp == NULL) {
-        raise(SIGINT);
+        return;
     }
     memset(temp, '\0', (m->len+1));
     memcpy(temp, msg, m->len);
@@ -94,7 +119,7 @@ void sendMessageToClient(int socket_id, char *msg) {
     if ( (status = encodeMessage(m)) != CONTINUE) {
         message_free(m);
         free(m);
-        raise(SIGINT);
+        return;
     }
 
     list_multicast_one(l, n, m);
@@ -194,46 +219,46 @@ void *cmdline(void *arg) {
 
 				ws_closeframe(n, CLOSE_SHUTDOWN);
 			}
-		} else if ( strncasecmp(buffer, "sendall", 7) == 0 ||
-			   strncasecmp(buffer, "writeall", 8) == 0) {
-			char *token = strtok(buffer, " ");
-			ws_connection_close status;
-
-			if (token != NULL) {
-				token = strtok(NULL, "");
-
-				if (token == NULL) {
-					printf("The command was executed without parameters. Type "
-						   "'help' to see how to execute the command properly."
-						   "\n");
-					fflush(stdout);
-					continue;
-				} else {
-					ws_message *m = message_new();
-					m->len = strlen(token);
-
-					char *temp = malloc( sizeof(char)*(m->len+1) );
-					if (temp == NULL) {
-						raise(SIGINT);
-						break;
-					}
-					memset(temp, '\0', (m->len+1));
-					memcpy(temp, token, m->len);
-					m->msg = temp;
-					temp = NULL;
-
-					if ( (status = encodeMessage(m)) != CONTINUE) {
-						message_free(m);
-						free(m);
-						raise(SIGINT);
-						break;;
-					}
-
-					list_multicast_all(l, m);
-					message_free(m);
-					free(m);
-				}
-			}
+//		} else if ( strncasecmp(buffer, "sendall", 7) == 0 ||
+//			   strncasecmp(buffer, "writeall", 8) == 0) {
+//			char *token = strtok(buffer, " ");
+//			ws_connection_close status;
+//
+//			if (token != NULL) {
+//				token = strtok(NULL, "");
+//
+//				if (token == NULL) {
+//					printf("The command was executed without parameters. Type "
+//						   "'help' to see how to execute the command properly."
+//						   "\n");
+//					fflush(stdout);
+//					continue;
+//				} else {
+//					ws_message *m = message_new();
+//					m->len = strlen(token);
+//
+//					char *temp = malloc( sizeof(char)*(m->len+1) );
+//					if (temp == NULL) {
+//						raise(SIGINT);
+//						break;
+//					}
+//					memset(temp, '\0', (m->len+1));
+//					memcpy(temp, token, m->len);
+//					m->msg = temp;
+//					temp = NULL;
+//
+//					if ( (status = encodeMessage(m)) != CONTINUE) {
+//						message_free(m);
+//						free(m);
+//						raise(SIGINT);
+//						break;;
+//					}
+//
+//					list_multicast_all(l, m);
+//					message_free(m);
+//					free(m);
+//				}
+//			}
 //		} else if ( strncasecmp(buffer, "send", 4) == 0 ||
 //				strncasecmp(buffer, "write", 5) == 0) {
 //			char *token = strtok(buffer, " "), *addr, *sock, *msg;

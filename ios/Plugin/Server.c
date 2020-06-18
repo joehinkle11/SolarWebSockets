@@ -143,3 +143,7 @@ void server_onMessage(ws_client *n, char *message) {
 void server_send(int clientId, const char *message) {
     sendMessageToClient(clientId, message);
 }
+
+void server_sendAll(const char *message) {
+    sendMessageToAll(message);
+}

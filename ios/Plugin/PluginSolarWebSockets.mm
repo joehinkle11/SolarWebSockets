@@ -46,6 +46,7 @@ class PluginLibrary
         static int startServer( lua_State *L );
         static int killServer( lua_State *L );
         static int send( lua_State *L );
+        static int sendAll( lua_State *L );
 
 	private:
 		CoronaLuaRef fListener;
@@ -93,6 +94,7 @@ PluginLibrary::Open( lua_State *L )
         { "startServer", startServer },
         { "killServer", killServer },
         { "send", send },
+        { "sendAll", sendAll },
 
 		{ NULL, NULL }
 	};
@@ -175,7 +177,6 @@ PluginLibrary::send( lua_State *L )
     
     int clientId = lua_tointeger( L, 1 );
     const char *message = lua_tostring( L, 2 );
-//    char *message = lua_tostring( L, 2 );
     if ( !message )
     {
         return 0;
@@ -184,6 +185,24 @@ PluginLibrary::send( lua_State *L )
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
         server_send(clientId, message);
+    });
+    return 0;
+}
+
+// [Lua] library.sendAll( message )
+int
+PluginLibrary::sendAll( lua_State *L )
+{
+    
+    const char *message = lua_tostring( L, 1 );
+    if ( !message )
+    {
+        return 0;
+    }
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        server_sendAll(message);
     });
     return 0;
 }
