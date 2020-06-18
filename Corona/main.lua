@@ -13,11 +13,10 @@ Runtime:addEventListener( "delegate", delegateListener )
 -- This event is dispatched to the following Lua function
 -- by PluginLibrary::show() in PluginLibrary.mm
 local function wsListener( event )
-    if event.message ~= nil then
-        print("have message", event.message)
-    end
     if event.name == "join" then
         print("join", "clients #", #event.clients)
+        print(event.clientId)
+        print(event.clientIp)
         for i=1, #event.clients do
             print(
                 "client "..tostring(i),
@@ -37,6 +36,8 @@ local function wsListener( event )
     end
     if event.name == "leave" then
         print("leave","clients #", #event.clients)
+        print(event.clientId)
+        print(event.clientIp)
         for i=1, #event.clients do
             print(
                 "client "..tostring(i),
@@ -55,7 +56,7 @@ SolarWebSockets.init( wsListener )
 
 local widget = require("widget")
 
-local button = widget.newButton({
+widget.newButton({
    left = 100,
    top = 100,
    label = "Start Server",
@@ -65,3 +66,15 @@ local button = widget.newButton({
    end,
    fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
 })
+
+
+widget.newButton({
+    left = 100,
+    top = 200,
+    label = "Kill Server",
+    shape = "rect",
+    onRelease = function()
+        SolarWebSockets.killServer()
+    end,
+    fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
+ })

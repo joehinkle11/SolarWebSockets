@@ -449,6 +449,11 @@ void *handleClient(void *args) {
 	uint64_t next_len = 0;
 	char next[BUFFERSIZE];
 	memset(next, '\0', BUFFERSIZE);
+    
+    // used for later, so that we can have the string for the ip address during cleanup (when the string inside "n" is being cleaned)
+    const size_t ipLen = strlen(n->client_ip) + 1;
+    char * ipCopy = malloc(ipLen);
+    strncpy(ipCopy, n->client_ip, ipLen);
 
 	while (1) {
 		if ( communicate(n, next, next_len) != CONTINUE) {
@@ -479,17 +484,16 @@ void *handleClient(void *args) {
 	printf("Shutting client down..\n\n");
 	printf("> ");
 	fflush(stdout);
-    
-    const size_t ipLen = strlen(n->client_ip) + 1;
-    char * ipCopy = malloc(ipLen);
-    strncpy(ipCopy, n->client_ip, ipLen);
-    server_onLeave(l, ipCopy, n->socket_id);
 
 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
 	list_remove(l, n);
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     
-	pthread_cleanup_pop(0);
+    if (l != NULL) {
+        server_onLeave(l, ipCopy, n->socket_id);
+    }
+    
+    pthread_cleanup_pop(0);
 	pthread_exit((void *) EXIT_SUCCESS);
 }
 
