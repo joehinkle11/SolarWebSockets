@@ -15,8 +15,43 @@ android {
     }
 }
 
+def platform = "mac"
+if (System.properties['os.name'].toLowerCase().contains('windows'))
+{
+    platform = "win"
+}
+
+def coronaNativeDir = System.getProperty("user.home") + "/Library/Application\\ Support/Corona/Native"
+if (platform == "win")
+{
+    coronaNativeDir = System.getenv("CORONA_ROOT")
+}
+
+task exportPluginJar (type: Copy) {
+    description 'Place the plugin JAR file in the outputs directory and give it a name from the AndroidManifest.xml'
+    group "Corona"
+    dependsOn "assembleRelease"
+    def pluginName = new XmlSlurper().parse(file('src/main/AndroidManifest.xml')).@package.text()
+    from "$buildDir/intermediates/packaged-classes/release/"
+    into "$buildDir/outputs/jar"
+    include 'classes.jar'
+    rename 'classes.jar', "${pluginName}.jar"
+
+    doFirst {
+        println '== exportPluginJar =='
+    }
+}
+
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.finalizedBy('exportPluginJar')
+}
+
 dependencies {
     implementation ':Corona@aar'
     compile "org.java-websocket:Java-WebSocket:1.5.1"
 //    compile 'com.koushikdutta.async:androidasync:2.+'
+
+    api fileTree(dir: "$coronaNativeDir/Corona/android/lib/Corona/libs", include: '*.jar')
+    api fileTree(dir: 'libs', include: '*.jar')
 }
