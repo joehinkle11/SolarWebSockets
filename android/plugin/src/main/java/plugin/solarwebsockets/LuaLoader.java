@@ -6,8 +6,8 @@
 //
 
 // This corresponds to the name of the Lua library,
-// e.g. [Lua] require "plugin.library"
-package plugin.library;
+// e.g. [Lua] require "plugin.solarwebsockets"
+package plugin.solarwebsockets;
 
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,7 +18,6 @@ import com.ansca.corona.CoronaLua;
 import com.ansca.corona.CoronaRuntime;
 import com.ansca.corona.CoronaRuntimeListener;
 import com.ansca.corona.CoronaRuntimeTask;
-import com.ansca.corona.CoronaRuntimeTaskDispatcher;
 import com.naef.jnlua.JavaFunction;
 import com.naef.jnlua.LuaState;
 import com.naef.jnlua.NamedJavaFunction;
@@ -198,7 +197,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 	 * @return Returns the number of values to be returned by the library.show() function.
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public int show(LuaState L) {
+	public int startServer(LuaState L) {
 		// Fetch a reference to the Corona activity.
 		// Note: Will be null if the end-user has just backed out of the activity.
 		CoronaActivity activity = CoronaEnvironment.getCoronaActivity();
@@ -296,7 +295,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		 */
 		@Override
 		public String getName() {
-			return "show";
+			return "startServer";
 		}
 		
 		/**
@@ -309,7 +308,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		 */
 		@Override
 		public int invoke(LuaState L) {
-			return show(L);
+			return startServer(L);
 		}
 	}
 }
