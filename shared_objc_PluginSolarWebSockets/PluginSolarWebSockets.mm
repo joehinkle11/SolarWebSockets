@@ -151,9 +151,10 @@ PluginLibrary::init( lua_State *L )
 int
 PluginLibrary::startServer( lua_State *L )
 {
+    int port = lua_tointeger( L, 1 );
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        server_startServer();
+        server_startServer(port);
     });
     return 0;
 }
