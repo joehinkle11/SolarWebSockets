@@ -1,0 +1,9 @@
+// This file contains basic setup for Corona Native apps and plugins
+
+CORONA_ROOT=$HOME/Library/Application Support/Corona/Native
+
+HEADER_SEARCH_PATHS = $(inherited) "$(CORONA_ROOT)/Corona/shared/include/Corona" "$(CORONA_ROOT)/Corona/shared/include/lua" "$(CORONA_ROOT)/Corona/ios/include/Corona"
+
+OTHER_LDFLAGS = -undefined dynamic_lookup
+
+GCC_PREPROCESSOR_DEFINITIONS[config=Debug] = $(inherited) CORONA_DEBUG DEBUG=1

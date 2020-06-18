@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 53;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A4E253C9166D716900DCDC2C /* PluginSolarWebSockets.mm in Sources */ = {isa = PBXBuildFile; fileRef = A447B617165D734C009EA762 /* PluginSolarWebSockets.mm */; };
+		F86711C3249A884400159DAC /* Server.c in Sources */ = {isa = PBXBuildFile; fileRef = F86711C1249A884400159DAC /* Server.c */; };
+		F8A06141249AAEA70026830A /* Datastructures.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06136249AAEA50026830A /* Datastructures.c */; };
+		F8A06142249AAEA70026830A /* Errors.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06137249AAEA50026830A /* Errors.c */; };
+		F8A06143249AAEA70026830A /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06139249AAEA60026830A /* md5.c */; };
+		F8A06144249AAEA70026830A /* Handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0613A249AAEA60026830A /* Handshake.c */; };
+		F8A06145249AAEA70026830A /* Communicate.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0613D249AAEA60026830A /* Communicate.c */; };
+		F8A06146249AAEA70026830A /* b64.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06140249AAEA70026830A /* b64.c */; };
+		F8A0614C249AAEBF0026830A /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06147249AAEBF0026830A /* sha1.c */; };
+		F8A0614D249AAEBF0026830A /* Websocket.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0614A249AAEBF0026830A /* Websocket.c */; };
+		F8A0614E249AAEBF0026830A /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0614B249AAEBF0026830A /* utf8.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4E253B4166D6FB300DCDC2C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A447B616165D734C009EA762 /* PluginSolarWebSockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSolarWebSockets.h; path = Plugin/PluginSolarWebSockets.h; sourceTree = "<group>"; };
+		A447B617165D734C009EA762 /* PluginSolarWebSockets.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginSolarWebSockets.mm; path = Plugin/PluginSolarWebSockets.mm; sourceTree = "<group>"; };
+		A4E253B6166D6FB300DCDC2C /* libplugin_library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libplugin_library.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F572F81A1EE0705B001BC814 /* CoronaNative.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoronaNative.xcconfig; sourceTree = "<group>"; };
+		F86711C1249A884400159DAC /* Server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Server.c; path = Plugin/Server.c; sourceTree = "<group>"; };
+		F86711C2249A884400159DAC /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = Plugin/Server.h; sourceTree = "<group>"; };
+		F8A06132249AAEA50026830A /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		F8A06133249AAEA50026830A /* Errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Errors.h; sourceTree = "<group>"; };
+		F8A06134249AAEA50026830A /* b64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b64.h; sourceTree = "<group>"; };
+		F8A06135249AAEA50026830A /* Origins.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Origins.dat; sourceTree = "<group>"; };
+		F8A06136249AAEA50026830A /* Datastructures.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Datastructures.c; sourceTree = "<group>"; };
+		F8A06137249AAEA50026830A /* Errors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Errors.c; sourceTree = "<group>"; };
+		F8A06138249AAEA50026830A /* Handshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Handshake.h; sourceTree = "<group>"; };
+		F8A06139249AAEA60026830A /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
+		F8A0613A249AAEA60026830A /* Handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Handshake.c; sourceTree = "<group>"; };
+		F8A0613B249AAEA60026830A /* Datastructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datastructures.h; sourceTree = "<group>"; };
+		F8A0613C249AAEA60026830A /* Communicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communicate.h; sourceTree = "<group>"; };
+		F8A0613D249AAEA60026830A /* Communicate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Communicate.c; sourceTree = "<group>"; };
+		F8A0613E249AAEA60026830A /* Hosts.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hosts.dat; sourceTree = "<group>"; };
+		F8A0613F249AAEA70026830A /* Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Includes.h; sourceTree = "<group>"; };
+		F8A06140249AAEA70026830A /* b64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = b64.c; sourceTree = "<group>"; };
+		F8A06147249AAEBF0026830A /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		F8A06148249AAEBF0026830A /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		F8A06149249AAEBF0026830A /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		F8A0614A249AAEBF0026830A /* Websocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Websocket.c; sourceTree = "<group>"; };
+		F8A0614B249AAEBF0026830A /* utf8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf8.c; sourceTree = "<group>"; };
+		F8A0614F249AAEE40026830A /* Websocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Websocket.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4E253B3166D6FB300DCDC2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A447B609165D72A6009EA762 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A447B616165D734C009EA762 /* PluginSolarWebSockets.h */,
+				A447B617165D734C009EA762 /* PluginSolarWebSockets.mm */,
+				F86711C2249A884400159DAC /* Server.h */,
+				F86711C1249A884400159DAC /* Server.c */,
+				F8A06140249AAEA70026830A /* b64.c */,
+				F8A06134249AAEA50026830A /* b64.h */,
+				F8A0613D249AAEA60026830A /* Communicate.c */,
+				F8A0613C249AAEA60026830A /* Communicate.h */,
+				F8A06136249AAEA50026830A /* Datastructures.c */,
+				F8A0613B249AAEA60026830A /* Datastructures.h */,
+				F8A06137249AAEA50026830A /* Errors.c */,
+				F8A06133249AAEA50026830A /* Errors.h */,
+				F8A0613A249AAEA60026830A /* Handshake.c */,
+				F8A06138249AAEA50026830A /* Handshake.h */,
+				F8A0613E249AAEA60026830A /* Hosts.dat */,
+				F8A0613F249AAEA70026830A /* Includes.h */,
+				F8A06139249AAEA60026830A /* md5.c */,
+				F8A06132249AAEA50026830A /* md5.h */,
+				F8A06135249AAEA50026830A /* Origins.dat */,
+				F8A06147249AAEBF0026830A /* sha1.c */,
+				F8A06148249AAEBF0026830A /* sha1.h */,
+				F8A0614B249AAEBF0026830A /* utf8.c */,
+				F8A06149249AAEBF0026830A /* utf8.h */,
+				F8A0614F249AAEE40026830A /* Websocket.h */,
+				F8A0614A249AAEBF0026830A /* Websocket.c */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		A484110E15114F700074BD57 = {
+			isa = PBXGroup;
+			children = (
+				A447B609165D72A6009EA762 /* Source */,
+				F54A40C01EE083A300AF417D /* CoronaNative */,
+				A484111A15114F700074BD57 /* Products */,
+				F86711C7249A8B5400159DAC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A484111A15114F700074BD57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4E253B6166D6FB300DCDC2C /* libplugin_library.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F54A40C01EE083A300AF417D /* CoronaNative */ = {
+			isa = PBXGroup;
+			children = (
+				F572F81A1EE0705B001BC814 /* CoronaNative.xcconfig */,
+			);
+			name = CoronaNative;
+			sourceTree = "<group>";
+		};
+		F86711C7249A8B5400159DAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A4E253B5166D6FB300DCDC2C /* plugin_library */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4E253BF166D6FB300DCDC2C /* Build configuration list for PBXNativeTarget "plugin_library" */;
+			buildPhases = (
+				C2E70B581EE9F110006E4570 /* Corona Native */,
+				A4E253B2166D6FB300DCDC2C /* Sources */,
+				A4E253B3166D6FB300DCDC2C /* Frameworks */,
+				A4E253B4166D6FB300DCDC2C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = plugin_library;
+			productName = plugin_library;
+			productReference = A4E253B6166D6FB300DCDC2C /* libplugin_library.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A484111015114F700074BD57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+			};
+			buildConfigurationList = A484111315114F700074BD57 /* Build configuration list for PBXProject "Plugin" */;
+			compatibilityVersion = "Xcode 11.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = A484110E15114F700074BD57;
+			productRefGroup = A484111A15114F700074BD57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A4E253B5166D6FB300DCDC2C /* plugin_library */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C2E70B581EE9F110006E4570 /* Corona Native */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Corona Native";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# echo \"CORONA_ROOT: ${CORONA_ROOT}\"\nif [ ! -d \"${CORONA_ROOT}\" ]\nthen\n    echo \"error: Corona Native has not been setup.  Run 'Native/SetupCoronaNative.app' in your Corona install to set it up\" >&2\n\n    exit 1\nelse\n    echo \"Building with Corona Native from $(readlink \"${CORONA_ROOT}\")\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A4E253B2166D6FB300DCDC2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8A06141249AAEA70026830A /* Datastructures.c in Sources */,
+				F8A06144249AAEA70026830A /* Handshake.c in Sources */,
+				F8A06146249AAEA70026830A /* b64.c in Sources */,
+				F8A0614C249AAEBF0026830A /* sha1.c in Sources */,
+				F8A06145249AAEA70026830A /* Communicate.c in Sources */,
+				F8A06143249AAEA70026830A /* md5.c in Sources */,
+				A4E253C9166D716900DCDC2C /* PluginSolarWebSockets.mm in Sources */,
+				F8A0614D249AAEBF0026830A /* Websocket.c in Sources */,
+				F8A06142249AAEA70026830A /* Errors.c in Sources */,
+				F8A0614E249AAEBF0026830A /* utf8.c in Sources */,
+				F86711C3249A884400159DAC /* Server.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A484114015114F700074BD57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F572F81A1EE0705B001BC814 /* CoronaNative.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A484114115114F700074BD57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F572F81A1EE0705B001BC814 /* CoronaNative.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4E253C0166D6FB300DCDC2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DSTROOT = /tmp/plugin_library.dst;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64e armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		A4E253C1166D6FB300DCDC2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DSTROOT = /tmp/plugin_library.dst;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64e armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A484111315114F700074BD57 /* Build configuration list for PBXProject "Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A484114015114F700074BD57 /* Debug */,
+				A484114115114F700074BD57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4E253BF166D6FB300DCDC2C /* Build configuration list for PBXNativeTarget "plugin_library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4E253C0166D6FB300DCDC2C /* Debug */,
+				A4E253C1166D6FB300DCDC2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A484111015114F700074BD57 /* Project object */;
+}
