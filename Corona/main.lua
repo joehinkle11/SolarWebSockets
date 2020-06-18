@@ -66,7 +66,7 @@ widget.newButton({
    end,
    fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
 })
-
+SolarWebSockets.startServer()
 
 widget.newButton({
     left = 100,

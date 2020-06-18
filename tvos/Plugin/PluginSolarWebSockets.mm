@@ -2,10 +2,15 @@
 //  PluginLibrary.mm
 //  TemplateApp
 //
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
 
-#import "PluginLibrary.h"
+#import "PluginSolarWebSockets.h"
+
+#include <CoronaRuntime.h>
 #import <UIKit/UIKit.h>
-#include <CoronaCards/CoronaRuntime.h>
+
+#include "Server.h"
 
 // ----------------------------------------------------------------------------
 
@@ -38,7 +43,10 @@ class PluginLibrary
 
 	public:
 		static int init( lua_State *L );
-		static int show( lua_State *L );
+        static int startServer( lua_State *L );
+        static int killServer( lua_State *L );
+        static int send( lua_State *L );
+        static int sendAll( lua_State *L );
 
 	private:
 		CoronaLuaRef fListener;
@@ -46,11 +54,11 @@ class PluginLibrary
 
 // ----------------------------------------------------------------------------
 
-// This corresponds to the name of the library, e.g. [Lua] require "plugin.library"
-const char PluginLibrary::kName[] = "plugin.library";
+// This corresponds to the name of the library, e.g. [Lua] require "plugin.solarwebsockets"
+const char PluginLibrary::kName[] = "plugin.solarwebsockets";
 
 // This corresponds to the event name, e.g. [Lua] event.name
-const char PluginLibrary::kEvent[] = "pluginlibraryevent";
+const char PluginLibrary::kEvent[] = "pluginsolarwebsockets";
 
 PluginLibrary::PluginLibrary()
 :	fListener( NULL )
@@ -66,6 +74,7 @@ PluginLibrary::Initialize( CoronaLuaRef listener )
 	if ( result )
 	{
 		fListener = listener;
+        server_fListener = fListener;
 	}
 
 	return result;
@@ -82,10 +91,15 @@ PluginLibrary::Open( lua_State *L )
 	const luaL_Reg kVTable[] =
 	{
 		{ "init", init },
-		{ "show", show },
+        { "startServer", startServer },
+        { "killServer", killServer },
+        { "send", send },
+        { "sendAll", sendAll },
 
 		{ NULL, NULL }
 	};
+    
+    server_L = L;
 
 	// Set library as upvalue for each library function
 	Self *library = new Self;
@@ -133,48 +147,71 @@ PluginLibrary::init( lua_State *L )
 	return 0;
 }
 
-// [Lua] library.show( word )
+// [Lua] library.startServer()
 int
-PluginLibrary::show( lua_State *L )
+PluginLibrary::startServer( lua_State *L )
 {
-	const char *word = "<nil>";
-	if(lua_isstring(L, 1))
-	{
-		word = lua_tostring(L, 1);
-	}
-
-	NSString *message = [NSString stringWithFormat:@"Hello from Corona Native for tvOS!\nYour word is: %s", word];
-
-	UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Corona"
-																   message:message
-															preferredStyle:UIAlertControllerStyleAlert];
+    int port = lua_tointeger( L, 1 );
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        server_startServer(port);
+    });
+    return 0;
+}
 
 
-	UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-														  handler:^(UIAlertAction * action) {}];
+// [Lua] library.killServer()
+int
+PluginLibrary::killServer( lua_State *L )
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        server_killServer();
+    });
+    return 0;
+}
 
-	[alert addAction:defaultAction];
+// [Lua] library.send( clientId, message )
+int
+PluginLibrary::send( lua_State *L )
+{
+    
+    int clientId = lua_tointeger( L, 1 );
+    const char *message = lua_tostring( L, 2 );
+    if ( !message )
+    {
+        return 0;
+    }
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        server_send(clientId, message);
+    });
+    return 0;
+}
 
-	id<CoronaRuntime> runtime = (id<CoronaRuntime>)CoronaLuaGetContext( L );
-	[runtime.appViewController presentViewController:alert animated:YES completion:nil];
-
-
-	Self *library = ToLibrary( L );
-
-	// Create event and add message to it
-	CoronaLuaNewEvent( L, kEvent );
-	lua_pushstring( L, [message UTF8String] );
-	lua_setfield( L, -2, "message" );
-
-	// Dispatch event to library's listener
-	CoronaLuaDispatchEvent( L, library->GetListener(), 0 );
-
-	return 0;
+// [Lua] library.sendAll( message )
+int
+PluginLibrary::sendAll( lua_State *L )
+{
+    
+    const char *message = lua_tostring( L, 1 );
+    if ( !message )
+    {
+        return 0;
+    }
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        server_sendAll(message);
+    });
+    return 0;
 }
 
 // ----------------------------------------------------------------------------
 
-CORONA_EXPORT int luaopen_plugin_library( lua_State *L )
+CORONA_EXPORT int luaopen_plugin_solarwebsockets( lua_State *L )
 {
 	return PluginLibrary::Open( L );
 }
