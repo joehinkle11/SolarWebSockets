@@ -1,4 +1,4 @@
-# Solar WebSockets (Server/Client)
+# Solar2d WebSockets (Server/Client)
 
 
 ## Overview
