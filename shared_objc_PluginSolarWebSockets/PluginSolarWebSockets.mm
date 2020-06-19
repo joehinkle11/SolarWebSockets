@@ -15,8 +15,10 @@
 
 // client stuff
 #include "SOXWebSocket.h"
+#include "Client.h"
 // Define variable or field for socket handle
 SOXWebSocket *client_socket = NULL;
+Client *client = [[Client alloc] init];
 
 
 // ----------------------------------------------------------------------------
@@ -308,33 +310,9 @@ PluginSolarWebSockets::sendAllClients( lua_State *L )
 //        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
 //    });
 //}
-//// callback trigered on socket received text
-//static void on_client_socket_received_text(rws_socket socket, const char * text, const unsigned int length) {
-//    // make a copy of this string, because it will be removed from memory
-//    const size_t messageLen = strlen(text) + 1;
-//    char * messageCopy = (char*)calloc(messageLen, sizeof(char));
-//    strncpy(messageCopy, text, messageLen);
-//    // send event on main thread
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
-//        lua_pushboolean(server_L, true );
-//        lua_setfield( server_L, -2, "isClient" );
-//        lua_pushboolean(server_L, false );
-//        lua_setfield( server_L, -2, "isServer" );
-//
-//        lua_pushstring( server_L, "message" );
-//        lua_setfield( server_L, -2, "name" );
-//
-//        lua_pushstring( server_L, messageCopy );
-//        lua_setfield( server_L, -2, "message" );
-//
-//        // Dispatch event to library's listener
-//        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
-//
-//        // free memory
-//        free(messageCopy);
-//    });
-//}
+
+
+
 
 // [Lua] library.connect( scheme, host, port, path )
 int
@@ -352,6 +330,9 @@ PluginSolarWebSockets::connect( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
+        
+        client_socket = [[SOXWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://echo.websocket.org"]]];
+        [client_socket setDelegate:client];
         // disconnect if already exists
 //        if (client_socket != NULL) {
 //            rws_socket_disconnect_and_release(client_socket);
@@ -390,9 +371,11 @@ PluginSolarWebSockets::sendServer( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-//        if (client_socket != NULL) {
-//            rws_socket_send_text(client_socket, message);
-//        }
+        if (client_socket != NULL) {
+            NSString *name = @(message);
+            id data = name;
+            [client_socket send:data];
+        }
     });
     return 0;
 }
@@ -406,10 +389,10 @@ PluginSolarWebSockets::disconnect( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-//        if (client_socket != NULL) {
+        if (client_socket != NULL) {
 //            rws_socket_disconnect_and_release(client_socket);
 //            client_socket = NULL;
-//        }
+        }
     });
     return 0;
 }

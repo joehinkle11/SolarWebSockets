@@ -19,6 +19,7 @@
 		F8A06215249B12E80026830A /* Errors.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0620B249B12E80026830A /* Errors.c */; };
 		F8A06219249B13660026830A /* PluginSolarWebSockets.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8A06218249B13660026830A /* PluginSolarWebSockets.mm */; };
 		F8FD12D5249C91AE00EB372C /* SOXWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12D4249C91AE00EB372C /* SOXWebSocket.m */; };
+		F8FD12DA249C942600EB372C /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12D9249C942600EB372C /* Client.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,8 @@
 		F8FD12D2249C91AE00EB372C /* SOXWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOXWebSocket.h; sourceTree = "<group>"; };
 		F8FD12D3249C91AE00EB372C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F8FD12D4249C91AE00EB372C /* SOXWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOXWebSocket.m; sourceTree = "<group>"; };
+		F8FD12D8249C942600EB372C /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		F8FD12D9249C942600EB372C /* Client.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +179,8 @@
 				F8FD12D2249C91AE00EB372C /* SOXWebSocket.h */,
 				F8FD12D3249C91AE00EB372C /* README.md */,
 				F8FD12D4249C91AE00EB372C /* SOXWebSocket.m */,
+				F8FD12D8249C942600EB372C /* Client.h */,
+				F8FD12D9249C942600EB372C /* Client.m */,
 			);
 			name = shared_SOXWebSocket;
 			path = ../shared_SOXWebSocket;
@@ -254,6 +259,7 @@
 				F8A0620F249B12E80026830A /* utf8.c in Sources */,
 				F8A06210249B12E80026830A /* Handshake.c in Sources */,
 				F8A06212249B12E80026830A /* b64.c in Sources */,
+				F8FD12DA249C942600EB372C /* Client.m in Sources */,
 				F8A06215249B12E80026830A /* Errors.c in Sources */,
 				F8A0620E249B12E80026830A /* sha1.c in Sources */,
 				F8A06219249B13660026830A /* PluginSolarWebSockets.mm in Sources */,
