@@ -187,6 +187,14 @@ widget.newButton({    left = 150,
 })
 ```
 
+## Sources
+ 
+ - https://github.com/TooTallNate/Java-WebSocket (MIT)
+ - https://github.com/mortzdk/Websocket (MIT)
+ - https://github.com/develephant/corona-html5-websockets-plugin (Apache-2.0)
+ - https://github.com/acmacalister/jetfire (Apache-2.0)
+
+
 ## Links 
 
 - Form post: https://forums.solar2d.com/t/i-created-a-websocket-server-plug-in/351648/3
