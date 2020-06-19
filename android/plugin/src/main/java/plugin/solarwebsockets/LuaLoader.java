@@ -39,6 +39,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 	public static final String EVENT_NAME = "pluginlibraryevent";
 
 	private Server server;
+	private Client client;
 
 
 	/**
@@ -74,12 +75,18 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 	public int invoke(LuaState L) {
 		// Register this plugin into Lua with the following functions.
 		NamedJavaFunction[] luaFunctions = new NamedJavaFunction[] {
+			// shared
 			new InitWrapper(),
+			// server
 			new StartServerWrapper(),
 			new KillServerWrapper(),
 			new KickWrapper(),
-			new SendWrapper(),
-			new SendAllWrapper(),
+			new SendClientWrapper(),
+			new SendAllClientsWrapper(),
+			// client
+			new ConnectWrapper(),
+			new SendServerWrapper(),
+			new DisconnectWrapper(),
 		};
 		String libName = L.toString( 1 );
 		L.register(libName, luaFunctions);
@@ -234,7 +241,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		return 0;
 	}
 
-	public int send(LuaState L) {
+	public int sendClient(LuaState L) {
 
 		if (server != null) {
 			try {
@@ -258,7 +265,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		return 0;
 	}
 
-	public int sendAll(LuaState L) {
+	public int sendAllClients(LuaState L) {
 
 		if (server != null) {
 			try {
@@ -271,6 +278,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 
 		return 0;
 	}
+
 
 	/**
 	 * The following Lua function has been called:  library.show( word )
@@ -309,12 +317,79 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 
 		}
 
+		return 0;
+	}
 
-//		dispatchEvent("Hello!");
+
+
+	public int connect(LuaState L) {
+
+		// Fetch a reference to the Corona activity.
+		// Note: Will be null if the end-user has just backed out of the activity.
+		CoronaActivity activity = CoronaEnvironment.getCoronaActivity();
+		if (activity == null) {
+			return 0;
+		}
+
+		// Fetch the first argument from the called Lua function.
+		String desiredUrl = null;
+		try {
+			desiredUrl = L.checkString( 1 );
+		} catch (Exception e) {
+			return 0;
+		}
+		if (client != null) {
+			try {
+				client.close();
+			} catch (Exception e) {
+
+			}
+		}
+
+		try {
+			client = Client.connect(desiredUrl);
+		} catch (Exception e) {
+
+		}
+
+		return 0;
+	}
+	public int disconnect(LuaState L) {
+
+		if (client != null) {
+			try {
+				client.close();
+			} catch (Exception e) {
+
+			}
+		}
+
+		return 0;
+	}
+	public int sendServer(LuaState L) {
+
+		if (client != null) {
+			try {
+				String message = L.checkString( 1 );
+				client.send(message);
+			} catch (Exception e) {
+
+			}
+		}
 
 		return 0;
 	}
 
+
+
+
+
+
+
+
+	//
+	// shared
+	//
 	/** Implements the library.init() Lua function. */
 	@SuppressWarnings("unused")
 	private class InitWrapper implements NamedJavaFunction {
@@ -340,7 +415,9 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 			return init(L);
 		}
 	}
-
+	//
+	// server
+	//
 	/** Implements the library.show() Lua function. */
 	@SuppressWarnings("unused")
 	private class StartServerWrapper implements NamedJavaFunction {
@@ -386,24 +463,57 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 			return kick(L);
 		}
 	}
-	private class SendWrapper implements NamedJavaFunction {
+	private class SendClientWrapper implements NamedJavaFunction {
 		@Override
 		public String getName() {
-			return "send";
+			return "sendClient";
 		}
 		@Override
 		public int invoke(LuaState L) {
-			return send(L);
+			return sendClient(L);
 		}
 	}
-	private class SendAllWrapper implements NamedJavaFunction {
+	private class SendAllClientsWrapper implements NamedJavaFunction {
 		@Override
 		public String getName() {
-			return "sendAll";
+			return "sendAllClients";
 		}
 		@Override
 		public int invoke(LuaState L) {
-			return sendAll(L);
+			return sendAllClients(L);
+		}
+	}
+	//
+	// client
+	//
+	private class ConnectWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "connect";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return connect(L);
+		}
+	}
+	private class DisconnectWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "disconnect";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return disconnect(L);
+		}
+	}
+	private class SendServerWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "sendServer";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return sendServer(L);
 		}
 	}
 }

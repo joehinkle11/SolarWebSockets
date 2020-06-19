@@ -62,6 +62,10 @@ public class Server extends WebSocketServer {
                 LuaState L = runtime.getLuaState();
 
                 CoronaLua.newEvent( L, LuaLoader.EVENT_NAME );
+                L.pushBoolean(false);
+                L.setField(-2, "isClient");
+                L.pushBoolean(true);
+                L.setField(-2, "isServer");
 
                 L.pushString("join");
                 L.setField(-2, "name");
@@ -101,6 +105,10 @@ public class Server extends WebSocketServer {
                 LuaState L = runtime.getLuaState();
 
                 CoronaLua.newEvent( L, LuaLoader.EVENT_NAME );
+                L.pushBoolean(false);
+                L.setField(-2, "isClient");
+                L.pushBoolean(true);
+                L.setField(-2, "isServer");
 
                 L.pushString("leave");
                 L.setField(-2, "name");
@@ -132,6 +140,10 @@ public class Server extends WebSocketServer {
                 LuaState L = runtime.getLuaState();
 
                 CoronaLua.newEvent( L, LuaLoader.EVENT_NAME );
+                L.pushBoolean(false);
+                L.setField(-2, "isClient");
+                L.pushBoolean(true);
+                L.setField(-2, "isServer");
 
                 L.pushString("message");
                 L.setField(-2, "name");

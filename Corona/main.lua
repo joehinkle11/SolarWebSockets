@@ -10,10 +10,14 @@ local function delegateListener( event )
 end
 Runtime:addEventListener( "delegate", delegateListener )
 
+local message = display.newText("debug messages here", 120, 320)
+
 -- This event is dispatched to the following Lua function
 -- by PluginLibrary::show() in PluginLibrary.mm
 local clients = {}
+local json = require("json")
 local function wsListener( event )
+    message.text = json.encode(event)
     if event.isServer then
         if event.name == "join" then
             print("join", "clients #", #event.clients)
@@ -135,12 +139,7 @@ widget.newButton({
     shape = "rect",
     onRelease = function()
         -- wss not supported on iOS...yet
-        SolarWebSockets.connect(
-            "ws",
-            "192.168.0.103",
-            4567,
-            "/"
-        )
+        SolarWebSockets.connect("ws://192.168.0.103:4567")
     end,
     fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
  })

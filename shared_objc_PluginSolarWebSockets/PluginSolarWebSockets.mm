@@ -14,11 +14,11 @@
 #include "Server.h"
 
 // client stuff
-#include "SOXWebSocket.h"
-#include "Client.h"
-// Define variable or field for socket handle
-SOXWebSocket *client_socket = NULL;
-Client *client = [[Client alloc] init];
+//#include "SOXWebSocket.h"
+//#include "Client.h"
+//// Define variable or field for socket handle
+//SOXWebSocket *client_socket = NULL;
+//Client *client = [[Client alloc] init];
 
 
 // ----------------------------------------------------------------------------
@@ -331,8 +331,8 @@ PluginSolarWebSockets::connect( lua_State *L )
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
         
-        client_socket = [[SOXWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://echo.websocket.org"]]];
-        [client_socket setDelegate:client];
+//        client_socket = [[SOXWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://echo.websocket.org"]]];
+//        [client_socket setDelegate:client];
         // disconnect if already exists
 //        if (client_socket != NULL) {
 //            rws_socket_disconnect_and_release(client_socket);
@@ -371,11 +371,11 @@ PluginSolarWebSockets::sendServer( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        if (client_socket != NULL) {
-            NSString *name = @(message);
-            id data = name;
-            [client_socket send:data];
-        }
+//        if (client_socket != NULL) {
+//            NSString *name = @(message);
+//            id data = name;
+//            [client_socket send:data];
+//        }
     });
     return 0;
 }
@@ -389,10 +389,10 @@ PluginSolarWebSockets::disconnect( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        if (client_socket != NULL) {
+//        if (client_socket != NULL) {
 //            rws_socket_disconnect_and_release(client_socket);
 //            client_socket = NULL;
-        }
+//        }
     });
     return 0;
 }
