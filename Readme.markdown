@@ -90,7 +90,7 @@ local function wsListener( event )
             print("got message from server")
             print(event.message)
             -- send reply
-            -- SolarWebSockets.send("reply "..event.message)
+            -- SolarWebSockets.sendServer("reply "..event.message)
         end
         if event.name == "leave" then
             -- not connected anymore
@@ -173,7 +173,8 @@ widget.newButton({
     fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
 })
  
-widget.newButton({    left = 150,
+widget.newButton({
+    left = 150,
     width = 100,
     top = 250,
     label = "Disconnect",
