@@ -14,9 +14,9 @@
 #include "Server.h"
 
 // client stuff
-#include "librws.h"
+#include "SOXWebSocket.h"
 // Define variable or field for socket handle
-rws_socket client_socket = NULL;
+SOXWebSocket *client_socket = NULL;
 
 
 // ----------------------------------------------------------------------------
@@ -248,93 +248,93 @@ PluginSolarWebSockets::sendAllClients( lua_State *L )
 // client callbacks
 //
 // callback trigered on socket disconnected with/without error
-static void on_client_socket_disconnected(rws_socket socket) {
-    // process error
-    rws_error error = rws_socket_get_error(socket);
-    int errorCode = -1;
-    char *errorMessage = NULL;
-    if (error) {
-        printf("\nSocket disconnect with code, error: %i, %s", rws_error_get_code(error), rws_error_get_description(error));
-        errorCode = rws_error_get_code(error);
-        const char *errorMessageTmp = rws_error_get_description(error);
-        const size_t messageLen = strlen(errorMessageTmp) + 1;
-        errorMessage = (char*)calloc(messageLen, sizeof(char));
-        strncpy(errorMessage, errorMessageTmp, messageLen);
-    }
-    // forget about this socket object, due to next disconnection sequence
-    client_socket = NULL;
-    
-    // send event on main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
-        lua_pushboolean(server_L, true );
-        lua_setfield( server_L, -2, "isClient" );
-        lua_pushboolean(server_L, false );
-        lua_setfield( server_L, -2, "isServer" );
-        
-        lua_pushstring( server_L, "leave" );
-        lua_setfield( server_L, -2, "name" );
-        
-        if (errorCode != -1) {
-            lua_pushinteger( server_L, errorCode );
-            lua_setfield( server_L, -2, "errorCode" );
-        }
-        if (errorMessage != NULL) {
-            lua_pushstring( server_L, errorMessage );
-            lua_setfield( server_L, -2, "errorMessage" );
-        }
-        // Dispatch event to library's listener
-        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
-    
-        // free memory
-        free(errorMessage);
-    });
-}
-// callback trigered on socket connected and handshake done
-static void on_client_socket_connected(rws_socket socket) {
-    printf("\nSocket connected");
-    // send event on main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
-        lua_pushboolean(server_L, true );
-        lua_setfield( server_L, -2, "isClient" );
-        lua_pushboolean(server_L, false );
-        lua_setfield( server_L, -2, "isServer" );
-
-        lua_pushstring( server_L, "join" );
-        lua_setfield( server_L, -2, "name" );
-
-        // Dispatch event to library's listener
-        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
-    });
-}
-// callback trigered on socket received text
-static void on_client_socket_received_text(rws_socket socket, const char * text, const unsigned int length) {
-    // make a copy of this string, because it will be removed from memory
-    const size_t messageLen = strlen(text) + 1;
-    char * messageCopy = (char*)calloc(messageLen, sizeof(char));
-    strncpy(messageCopy, text, messageLen);
-    // send event on main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
-        lua_pushboolean(server_L, true );
-        lua_setfield( server_L, -2, "isClient" );
-        lua_pushboolean(server_L, false );
-        lua_setfield( server_L, -2, "isServer" );
-
-        lua_pushstring( server_L, "message" );
-        lua_setfield( server_L, -2, "name" );
-
-        lua_pushstring( server_L, messageCopy );
-        lua_setfield( server_L, -2, "message" );
-
-        // Dispatch event to library's listener
-        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
-
-        // free memory
-        free(messageCopy);
-    });
-}
+//static void on_client_socket_disconnected(rws_socket socket) {
+//    // process error
+//    rws_error error = rws_socket_get_error(socket);
+//    int errorCode = -1;
+//    char *errorMessage = NULL;
+//    if (error) {
+//        printf("\nSocket disconnect with code, error: %i, %s", rws_error_get_code(error), rws_error_get_description(error));
+//        errorCode = rws_error_get_code(error);
+//        const char *errorMessageTmp = rws_error_get_description(error);
+//        const size_t messageLen = strlen(errorMessageTmp) + 1;
+//        errorMessage = (char*)calloc(messageLen, sizeof(char));
+//        strncpy(errorMessage, errorMessageTmp, messageLen);
+//    }
+//    // forget about this socket object, due to next disconnection sequence
+//    client_socket = NULL;
+//
+//    // send event on main thread
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
+//        lua_pushboolean(server_L, true );
+//        lua_setfield( server_L, -2, "isClient" );
+//        lua_pushboolean(server_L, false );
+//        lua_setfield( server_L, -2, "isServer" );
+//
+//        lua_pushstring( server_L, "leave" );
+//        lua_setfield( server_L, -2, "name" );
+//
+//        if (errorCode != -1) {
+//            lua_pushinteger( server_L, errorCode );
+//            lua_setfield( server_L, -2, "errorCode" );
+//        }
+//        if (errorMessage != NULL) {
+//            lua_pushstring( server_L, errorMessage );
+//            lua_setfield( server_L, -2, "errorMessage" );
+//        }
+//        // Dispatch event to library's listener
+//        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
+//
+//        // free memory
+//        free(errorMessage);
+//    });
+//}
+//// callback trigered on socket connected and handshake done
+//static void on_client_socket_connected(rws_socket socket) {
+//    printf("\nSocket connected");
+//    // send event on main thread
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
+//        lua_pushboolean(server_L, true );
+//        lua_setfield( server_L, -2, "isClient" );
+//        lua_pushboolean(server_L, false );
+//        lua_setfield( server_L, -2, "isServer" );
+//
+//        lua_pushstring( server_L, "join" );
+//        lua_setfield( server_L, -2, "name" );
+//
+//        // Dispatch event to library's listener
+//        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
+//    });
+//}
+//// callback trigered on socket received text
+//static void on_client_socket_received_text(rws_socket socket, const char * text, const unsigned int length) {
+//    // make a copy of this string, because it will be removed from memory
+//    const size_t messageLen = strlen(text) + 1;
+//    char * messageCopy = (char*)calloc(messageLen, sizeof(char));
+//    strncpy(messageCopy, text, messageLen);
+//    // send event on main thread
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CoronaLuaNewEvent( server_L, PluginSolarWebSockets::kEvent );
+//        lua_pushboolean(server_L, true );
+//        lua_setfield( server_L, -2, "isClient" );
+//        lua_pushboolean(server_L, false );
+//        lua_setfield( server_L, -2, "isServer" );
+//
+//        lua_pushstring( server_L, "message" );
+//        lua_setfield( server_L, -2, "name" );
+//
+//        lua_pushstring( server_L, messageCopy );
+//        lua_setfield( server_L, -2, "message" );
+//
+//        // Dispatch event to library's listener
+//        CoronaLuaDispatchEvent( server_L, server_fListener, 0 );
+//
+//        // free memory
+//        free(messageCopy);
+//    });
+//}
 
 // [Lua] library.connect( scheme, host, port, path )
 int
@@ -353,26 +353,26 @@ PluginSolarWebSockets::connect( lua_State *L )
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
         // disconnect if already exists
-        if (client_socket != NULL) {
-            rws_socket_disconnect_and_release(client_socket);
-            client_socket = NULL;
-        }
-        
-        //create socket object
-        client_socket = rws_socket_create();
-        
-        
-        // Set socket callbacks
-        rws_socket_set_on_disconnected(client_socket, &on_client_socket_disconnected); // required
-        rws_socket_set_on_connected(client_socket, &on_client_socket_connected);
-        rws_socket_set_on_received_text(client_socket, &on_client_socket_received_text);
-        
-        // connect
-        rws_socket_set_scheme(client_socket, scheme);
-        rws_socket_set_host(client_socket, host);
-        rws_socket_set_port(client_socket, port);
-        rws_socket_set_path(client_socket, path);
-        rws_socket_connect(client_socket);
+//        if (client_socket != NULL) {
+//            rws_socket_disconnect_and_release(client_socket);
+//            client_socket = NULL;
+//        }
+//        
+//        //create socket object
+//        client_socket = rws_socket_create();
+//        
+//        
+//        // Set socket callbacks
+//        rws_socket_set_on_disconnected(client_socket, &on_client_socket_disconnected); // required
+//        rws_socket_set_on_connected(client_socket, &on_client_socket_connected);
+//        rws_socket_set_on_received_text(client_socket, &on_client_socket_received_text);
+//        
+//        // connect
+//        rws_socket_set_scheme(client_socket, scheme);
+//        rws_socket_set_host(client_socket, host);
+//        rws_socket_set_port(client_socket, port);
+//        rws_socket_set_path(client_socket, path);
+//        rws_socket_connect(client_socket);
     });
     return 0;
 }
@@ -390,9 +390,9 @@ PluginSolarWebSockets::sendServer( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        if (client_socket != NULL) {
-            rws_socket_send_text(client_socket, message);
-        }
+//        if (client_socket != NULL) {
+//            rws_socket_send_text(client_socket, message);
+//        }
     });
     return 0;
 }
@@ -406,10 +406,10 @@ PluginSolarWebSockets::disconnect( lua_State *L )
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        if (client_socket != NULL) {
-            rws_socket_disconnect_and_release(client_socket);
-            client_socket = NULL;
-        }
+//        if (client_socket != NULL) {
+//            rws_socket_disconnect_and_release(client_socket);
+//            client_socket = NULL;
+//        }
     });
     return 0;
 }
