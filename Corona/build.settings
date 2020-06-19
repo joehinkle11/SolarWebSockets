@@ -13,6 +13,14 @@ settings =
 	},
 	--]]
 
+
+	plugins = {
+		["plugin.solarwebsockets"] =
+		{
+			publisherId = "io.joehinkle",
+		},
+	},
+
 	iphone =
 	{
 		xcassets = "Images.xcassets",

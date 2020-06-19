@@ -18,6 +18,7 @@ CORONA_EXPORT lua_State *server_L;
 CORONA_EXPORT int testttt234(void);
 CORONA_EXPORT void server_startServer(int);
 CORONA_EXPORT void server_killServer(void);
+CORONA_EXPORT void server_kick(int);
 CORONA_EXPORT void server_send(int,const char*);
 CORONA_EXPORT void server_sendAll(const char*);
 

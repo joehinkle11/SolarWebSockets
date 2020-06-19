@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
-repositories {
-    mavenCentral()
-}
+//repositories {
+//    mavenCentral()
+//}
 
 android {
     compileSdkVersion 28
@@ -49,8 +49,7 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     implementation ':Corona@aar'
-    compile "org.java-websocket:Java-WebSocket:1.5.1"
-//    compile 'com.koushikdutta.async:androidasync:2.+'
+//    compile "org.java-websocket:Java-WebSocket:1.5.1"
 
     api fileTree(dir: "$coronaNativeDir/Corona/android/lib/Corona/libs", include: '*.jar')
     api fileTree(dir: 'libs', include: '*.jar')

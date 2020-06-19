@@ -77,6 +77,7 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 			new InitWrapper(),
 			new StartServerWrapper(),
 			new KillServerWrapper(),
+			new KickWrapper(),
 			new SendWrapper(),
 			new SendAllWrapper(),
 		};
@@ -201,6 +202,30 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		if (server != null) {
 			try {
 				server.stop();
+			} catch (Exception e) {
+
+			}
+		}
+
+		return 0;
+	}
+
+
+	public int kick(LuaState L) {
+
+		if (server != null) {
+			try {
+				Integer clientId = L.checkInteger( 1 );
+				WebSocket conn = null;
+				for (int i = 0; i < server.clients.size(); i++) {
+					if (server.clients.get(i).id.equals(clientId)) {
+						conn = server.clients.get(i).conn;
+						break;
+					}
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (Exception e) {
 
 			}
@@ -349,6 +374,16 @@ public class LuaLoader implements JavaFunction, CoronaRuntimeListener {
 		@Override
 		public int invoke(LuaState L) {
 			return killServer(L);
+		}
+	}
+	private class KickWrapper implements NamedJavaFunction {
+		@Override
+		public String getName() {
+			return "kick";
+		}
+		@Override
+		public int invoke(LuaState L) {
+			return kick(L);
 		}
 	}
 	private class SendWrapper implements NamedJavaFunction {

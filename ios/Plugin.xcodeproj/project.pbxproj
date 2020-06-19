@@ -18,6 +18,16 @@
 		F8A06214249B12E80026830A /* Datastructures.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06209249B12E80026830A /* Datastructures.c */; };
 		F8A06215249B12E80026830A /* Errors.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0620B249B12E80026830A /* Errors.c */; };
 		F8A06219249B13660026830A /* PluginSolarWebSockets.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8A06218249B13660026830A /* PluginSolarWebSockets.mm */; };
+		F8FD12C7249C7FDB00EB372C /* rws_list.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12B7249C7FDB00EB372C /* rws_list.c */; };
+		F8FD12C8249C7FDB00EB372C /* librws.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12B9249C7FDB00EB372C /* librws.c */; };
+		F8FD12C9249C7FDB00EB372C /* rws_socketpub.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12BD249C7FDB00EB372C /* rws_socketpub.c */; };
+		F8FD12CA249C7FDB00EB372C /* rws_string.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12BE249C7FDB00EB372C /* rws_string.c */; };
+		F8FD12CB249C7FDB00EB372C /* rws_socketpriv.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12BF249C7FDB00EB372C /* rws_socketpriv.c */; };
+		F8FD12CC249C7FDB00EB372C /* rws_frame.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12C0249C7FDB00EB372C /* rws_frame.c */; };
+		F8FD12CD249C7FDB00EB372C /* rws_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12C2249C7FDB00EB372C /* rws_memory.c */; };
+		F8FD12CE249C7FDB00EB372C /* rws_error.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12C3249C7FDB00EB372C /* rws_error.c */; };
+		F8FD12CF249C7FDB00EB372C /* rws_common.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12C5249C7FDB00EB372C /* rws_common.c */; };
+		F8FD12D0249C7FDB00EB372C /* rws_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FD12C6249C7FDB00EB372C /* rws_thread.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +70,25 @@
 		F8A0620C249B12E80026830A /* Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Includes.h; sourceTree = "<group>"; };
 		F8A06217249B13660026830A /* PluginSolarWebSockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginSolarWebSockets.h; sourceTree = "<group>"; };
 		F8A06218249B13660026830A /* PluginSolarWebSockets.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PluginSolarWebSockets.mm; sourceTree = "<group>"; };
+		F8FD12B4249C7FDB00EB372C /* rws_frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_frame.h; sourceTree = "<group>"; };
+		F8FD12B5249C7FDB00EB372C /* rws_socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_socket.h; sourceTree = "<group>"; };
+		F8FD12B6249C7FDB00EB372C /* rws_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_string.h; sourceTree = "<group>"; };
+		F8FD12B7249C7FDB00EB372C /* rws_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_list.c; sourceTree = "<group>"; };
+		F8FD12B8249C7FDB00EB372C /* rws_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_error.h; sourceTree = "<group>"; };
+		F8FD12B9249C7FDB00EB372C /* librws.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = librws.c; sourceTree = "<group>"; };
+		F8FD12BA249C7FDB00EB372C /* rws_memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_memory.h; sourceTree = "<group>"; };
+		F8FD12BB249C7FDB00EB372C /* rws_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_common.h; sourceTree = "<group>"; };
+		F8FD12BC249C7FDB00EB372C /* rws_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_thread.h; sourceTree = "<group>"; };
+		F8FD12BD249C7FDB00EB372C /* rws_socketpub.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_socketpub.c; sourceTree = "<group>"; };
+		F8FD12BE249C7FDB00EB372C /* rws_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_string.c; sourceTree = "<group>"; };
+		F8FD12BF249C7FDB00EB372C /* rws_socketpriv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_socketpriv.c; sourceTree = "<group>"; };
+		F8FD12C0249C7FDB00EB372C /* rws_frame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_frame.c; sourceTree = "<group>"; };
+		F8FD12C1249C7FDB00EB372C /* rws_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rws_list.h; sourceTree = "<group>"; };
+		F8FD12C2249C7FDB00EB372C /* rws_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_memory.c; sourceTree = "<group>"; };
+		F8FD12C3249C7FDB00EB372C /* rws_error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_error.c; sourceTree = "<group>"; };
+		F8FD12C4249C7FDB00EB372C /* librws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = librws.h; sourceTree = "<group>"; };
+		F8FD12C5249C7FDB00EB372C /* rws_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_common.c; sourceTree = "<group>"; };
+		F8FD12C6249C7FDB00EB372C /* rws_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rws_thread.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +105,7 @@
 		A447B609165D72A6009EA762 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F8FD12B3249C7FDB00EB372C /* shared_librws_client */,
 				F8A06216249B13660026830A /* shared_objc_PluginSolarWebSockets */,
 				F8A061F7249B12E80026830A /* shared_websockets */,
 				F8A061F3249B12C70026830A /* shared_server */,
@@ -165,6 +195,33 @@
 			path = ../shared_objc_PluginSolarWebSockets;
 			sourceTree = "<group>";
 		};
+		F8FD12B3249C7FDB00EB372C /* shared_librws_client */ = {
+			isa = PBXGroup;
+			children = (
+				F8FD12B4249C7FDB00EB372C /* rws_frame.h */,
+				F8FD12B5249C7FDB00EB372C /* rws_socket.h */,
+				F8FD12B6249C7FDB00EB372C /* rws_string.h */,
+				F8FD12B7249C7FDB00EB372C /* rws_list.c */,
+				F8FD12B8249C7FDB00EB372C /* rws_error.h */,
+				F8FD12B9249C7FDB00EB372C /* librws.c */,
+				F8FD12BA249C7FDB00EB372C /* rws_memory.h */,
+				F8FD12BB249C7FDB00EB372C /* rws_common.h */,
+				F8FD12BC249C7FDB00EB372C /* rws_thread.h */,
+				F8FD12BD249C7FDB00EB372C /* rws_socketpub.c */,
+				F8FD12BE249C7FDB00EB372C /* rws_string.c */,
+				F8FD12BF249C7FDB00EB372C /* rws_socketpriv.c */,
+				F8FD12C0249C7FDB00EB372C /* rws_frame.c */,
+				F8FD12C1249C7FDB00EB372C /* rws_list.h */,
+				F8FD12C2249C7FDB00EB372C /* rws_memory.c */,
+				F8FD12C3249C7FDB00EB372C /* rws_error.c */,
+				F8FD12C4249C7FDB00EB372C /* librws.h */,
+				F8FD12C5249C7FDB00EB372C /* rws_common.c */,
+				F8FD12C6249C7FDB00EB372C /* rws_thread.c */,
+			);
+			name = shared_librws_client;
+			path = ../shared_librws_client;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,15 +294,25 @@
 			files = (
 				F8A0620F249B12E80026830A /* utf8.c in Sources */,
 				F8A06210249B12E80026830A /* Handshake.c in Sources */,
+				F8FD12C7249C7FDB00EB372C /* rws_list.c in Sources */,
 				F8A06212249B12E80026830A /* b64.c in Sources */,
 				F8A06215249B12E80026830A /* Errors.c in Sources */,
+				F8FD12CF249C7FDB00EB372C /* rws_common.c in Sources */,
+				F8FD12C8249C7FDB00EB372C /* librws.c in Sources */,
+				F8FD12CB249C7FDB00EB372C /* rws_socketpriv.c in Sources */,
 				F8A0620E249B12E80026830A /* sha1.c in Sources */,
 				F8A06219249B13660026830A /* PluginSolarWebSockets.mm in Sources */,
+				F8FD12CD249C7FDB00EB372C /* rws_memory.c in Sources */,
+				F8FD12CE249C7FDB00EB372C /* rws_error.c in Sources */,
 				F8A061F6249B12DC0026830A /* Server.c in Sources */,
+				F8FD12CA249C7FDB00EB372C /* rws_string.c in Sources */,
 				F8A06213249B12E80026830A /* md5.c in Sources */,
 				F8A06214249B12E80026830A /* Datastructures.c in Sources */,
+				F8FD12C9249C7FDB00EB372C /* rws_socketpub.c in Sources */,
 				F8A0620D249B12E80026830A /* Communicate.c in Sources */,
 				F8A06211249B12E80026830A /* Websocket.c in Sources */,
+				F8FD12CC249C7FDB00EB372C /* rws_frame.c in Sources */,
+				F8FD12D0249C7FDB00EB372C /* rws_thread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

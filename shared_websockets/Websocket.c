@@ -127,6 +127,18 @@ void sendMessageToClient(int socket_id, char *msg) {
     free(m);
 }
 
+void kickClient(int socket_id) {
+    ws_client *n = list_get_by_socket(l, socket_id);
+
+    if (n == NULL) {
+        printf("The client that was supposed to receive the "
+               "message, was not found in the userlist.\n");
+        return;
+    }
+
+    ws_closeframe(n, CLOSE_SHUTDOWN);
+}
+
 /**
  * This function listens for input from STDIN and tries to match it to a
  * pattern that will trigger different actions.
@@ -178,47 +190,47 @@ void *cmdline(void *arg) {
 		} else if ( strncasecmp(buffer, "kickall", 7) == 0 ||
 				strncasecmp(buffer, "closeall", 8) == 0) {
 			list_remove_all(l);
-		} else if ( strncasecmp(buffer, "kick", 4) == 0 ||
-				strncasecmp(buffer, "close", 5) == 0) {
-			char *token = strtok(buffer, " "), *addr, *sock;
-
-			if (token != NULL) {
-				token = strtok(NULL, " ");
-
-				if (token == NULL) {
-					printf("The command was executed without parameters. Type "
-						   "'help' to see how to execute the command properly."
-						   "\n");
-					fflush(stdout);
-					continue;
-				} else {
-					addr = token;
-				}
-
-				token = strtok(NULL, "");
-
-				if (token == NULL) {
-					printf("The command was executed with too few parameters. Type "
-						   "'help' to see how to execute the command properly."
-						   "\n");
-					fflush(stdout);
-					continue;
-				} else {
-					sock = token;
-				}
-
-				ws_client *n = list_get(l, addr,
-						strtol(sock, (char **) NULL, 10));
-
-				if (n == NULL) {
-					printf("The client that was supposed to receive the "
-						   "message, was not found in the userlist.\n");
-					fflush(stdout);
-					continue;
-				}
-
-				ws_closeframe(n, CLOSE_SHUTDOWN);
-			}
+//		} else if ( strncasecmp(buffer, "kick", 4) == 0 ||
+//				strncasecmp(buffer, "close", 5) == 0) {
+//			char *token = strtok(buffer, " "), *addr, *sock;
+//
+//			if (token != NULL) {
+//				token = strtok(NULL, " ");
+//
+//				if (token == NULL) {
+//					printf("The command was executed without parameters. Type "
+//						   "'help' to see how to execute the command properly."
+//						   "\n");
+//					fflush(stdout);
+//					continue;
+//				} else {
+//					addr = token;
+//				}
+//
+//				token = strtok(NULL, "");
+//
+//				if (token == NULL) {
+//					printf("The command was executed with too few parameters. Type "
+//						   "'help' to see how to execute the command properly."
+//						   "\n");
+//					fflush(stdout);
+//					continue;
+//				} else {
+//					sock = token;
+//				}
+//
+//				ws_client *n = list_get(l, addr,
+//						strtol(sock, (char **) NULL, 10));
+//
+//				if (n == NULL) {
+//					printf("The client that was supposed to receive the "
+//						   "message, was not found in the userlist.\n");
+//					fflush(stdout);
+//					continue;
+//				}
+//
+//				ws_closeframe(n, CLOSE_SHUTDOWN);
+//			}
 //		} else if ( strncasecmp(buffer, "sendall", 7) == 0 ||
 //			   strncasecmp(buffer, "writeall", 8) == 0) {
 //			char *token = strtok(buffer, " ");
@@ -454,6 +466,7 @@ void *handleClient(void *args) {
     const size_t ipLen = strlen(n->client_ip) + 1;
     char * ipCopy = malloc(ipLen);
     strncpy(ipCopy, n->client_ip, ipLen);
+    int idCopy = n->socket_id;
 
 	while (1) {
 		if ( communicate(n, next, next_len) != CONTINUE) {
@@ -490,7 +503,7 @@ void *handleClient(void *args) {
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     
     if (l != NULL) {
-        server_onLeave(l, ipCopy, n->socket_id);
+        server_onLeave(l, ipCopy, idCopy);
     }
     
     pthread_cleanup_pop(0);

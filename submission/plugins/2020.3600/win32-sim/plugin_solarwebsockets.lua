@@ -27,6 +27,10 @@ lib.sendAll = function()
 	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
 end
 
+lib.kick = function()
+	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
+end
+
 -------------------------------------------------------------------------------
 -- END
 -------------------------------------------------------------------------------

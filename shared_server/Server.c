@@ -68,6 +68,11 @@ void server_onJoin(ws_list *l, char *joinerIp, int joinerId) {
     if ((server_fListener != NULL) && (server_L != NULL)) {
         dispatch_async(dispatch_get_main_queue(), ^{
             CoronaLuaNewEvent( server_L, kEvent );
+            lua_pushboolean(server_L, false );
+            lua_setfield( server_L, -2, "isClient" );
+            lua_pushboolean(server_L, true );
+            lua_setfield( server_L, -2, "isServer" );
+            
             lua_pushstring( server_L, "join" );
             lua_setfield( server_L, -2, "name" );
             
@@ -89,6 +94,11 @@ void server_onLeave(ws_list *l, char *leaverIp, int leaveId) {
     if ((server_fListener != NULL) && (server_L != NULL)) {
         dispatch_async(dispatch_get_main_queue(), ^{
             CoronaLuaNewEvent( server_L, kEvent );
+            lua_pushboolean(server_L, false );
+            lua_setfield( server_L, -2, "isClient" );
+            lua_pushboolean(server_L, true );
+            lua_setfield( server_L, -2, "isServer" );
+            
             lua_pushstring( server_L, "leave" );
             lua_setfield( server_L, -2, "name" );
             
@@ -119,6 +129,11 @@ void server_onMessage(ws_client *n, char *message) {
         // send event on main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             CoronaLuaNewEvent( server_L, kEvent );
+            lua_pushboolean(server_L, false );
+            lua_setfield( server_L, -2, "isClient" );
+            lua_pushboolean(server_L, true );
+            lua_setfield( server_L, -2, "isServer" );
+            
             lua_pushstring( server_L, "message" );
             lua_setfield( server_L, -2, "name" );
 
@@ -139,6 +154,11 @@ void server_onMessage(ws_client *n, char *message) {
         });
     }
 }
+
+void server_kick(int clientId) {
+    kickClient(clientId);
+}
+
 
 void server_send(int clientId, const char *message) {
     sendMessageToClient(clientId, message);
