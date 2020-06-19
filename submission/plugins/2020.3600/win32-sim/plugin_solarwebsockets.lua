@@ -19,15 +19,27 @@ lib.killServer = function()
 	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
 end
 
-lib.send = function()
+lib.sendClient = function()
 	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
 end
 
-lib.sendAll = function()
+lib.sendAllClients = function()
 	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
 end
 
 lib.kick = function()
+	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
+end
+
+lib.connect = function()
+	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
+end
+
+lib.disconnect = function()
+	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
+end
+
+lib.sendServer = function()
 	print( "WARNING: The '" .. lib.name .. "' library is not available on this platform." )
 end
 
