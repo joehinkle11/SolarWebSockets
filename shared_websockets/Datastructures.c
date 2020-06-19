@@ -326,22 +326,23 @@ ws_client *list_get(ws_list *l, char *addr, int socket) {
  */
 ws_client *list_get_by_socket(ws_list *l, int socket) {
     ws_client *p;
-    pthread_mutex_lock(&l->lock);
-    p = l->first;
-    
-    if (p == NULL) {
-        pthread_mutex_unlock(&l->lock);
-        return p;
-    }
-
-    do {
-        if (p->socket_id == socket) {
-            break;
+    if (l != NULL) {
+        pthread_mutex_lock(&l->lock);
+        p = l->first;
+        
+        if (p == NULL) {
+            pthread_mutex_unlock(&l->lock);
+            return p;
         }
-        p = p->next;
-    } while (p != NULL);
-    pthread_mutex_unlock(&l->lock);
 
+        do {
+            if (p->socket_id == socket) {
+                break;
+            }
+            p = p->next;
+        } while (p != NULL);
+        pthread_mutex_unlock(&l->lock);
+    }
     return p;
 }
 

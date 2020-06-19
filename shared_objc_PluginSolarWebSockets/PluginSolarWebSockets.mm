@@ -14,10 +14,10 @@
 #include "Server.h"
 
 // client stuff
-//#include "SOXWebSocket.h"
+#include "Jetfire.h"
 //#include "Client.h"
 //// Define variable or field for socket handle
-//SOXWebSocket *client_socket = NULL;
+JFRWebSocket *client_socket = NULL;
 //Client *client = [[Client alloc] init];
 
 
@@ -314,23 +314,24 @@ PluginSolarWebSockets::sendAllClients( lua_State *L )
 
 
 
-// [Lua] library.connect( scheme, host, port, path )
+// [Lua] library.connect( url )
 int
 PluginSolarWebSockets::connect( lua_State *L )
 {
     
-    const char *scheme = lua_tostring( L, 1 );
-    const char *host = lua_tostring( L, 2 );
-    const int port = lua_tointeger( L, 3 );
-    const char *path = lua_tostring( L, 4 );
-    if ( !scheme || !host || !path )
+    const char *url = lua_tostring( L, 1 );
+    if ( !url )
     {
         return 0;
     }
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        
+        client_socket = [[JFRWebSocket alloc] initWithURL:[NSURL URLWithString: @(url)] protocols:@[]];
+//        protocols:@[@"chat",@"superchat"]];
+//        client_socket.delegate = self;
+        [client_socket connect];
+
 //        client_socket = [[SOXWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://echo.websocket.org"]]];
 //        [client_socket setDelegate:client];
         // disconnect if already exists
