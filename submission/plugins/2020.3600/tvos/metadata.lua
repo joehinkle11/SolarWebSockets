@@ -4,7 +4,7 @@ local metadata =
 	{
 		format = 'framework',
 		staticLibs = {},
-		frameworks = { "Corona_plugin_library" },
+		frameworks = { "Corona_plugin_solarwebsockets" },
 		frameworksOptional = {},
 	},
 }

@@ -80,6 +80,14 @@
 		F8A06240249BC51C0026830A /* Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Includes.h; sourceTree = "<group>"; };
 		F8A06257249BC5830026830A /* PluginSolarWebSockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginSolarWebSockets.h; sourceTree = "<group>"; };
 		F8A06258249BC5830026830A /* PluginSolarWebSockets.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PluginSolarWebSockets.mm; sourceTree = "<group>"; };
+		F8FD140C249CB22700EB372C /* JFRSecurity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFRSecurity.h; sourceTree = "<group>"; };
+		F8FD140D249CB22700EB372C /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F8FD140E249CB22700EB372C /* JFRWebSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFRWebSocket.h; sourceTree = "<group>"; };
+		F8FD140F249CB22700EB372C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F8FD1410249CB22700EB372C /* JFRSecurity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFRSecurity.m; sourceTree = "<group>"; };
+		F8FD1411249CB22700EB372C /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		F8FD1412249CB22700EB372C /* JFRWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFRWebSocket.m; sourceTree = "<group>"; };
+		F8FD1413249CB22700EB372C /* Jetfire.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Jetfire.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,7 @@
 				A445A93816ADFC8B00A9A764 /* simulator_plugin_library.lua */,
 				A445A93916ADFC8B00A9A764 /* SimulatorPluginLibrary.cpp */,
 				A445A93A16ADFC8B00A9A764 /* SimulatorPluginLibrary.h */,
+				F8FD140B249CB22700EB372C /* shared_jetfire */,
 				F8A06256249BC5830026830A /* shared_objc_PluginSolarWebSockets */,
 				F8A06228249BC51C0026830A /* shared_server */,
 				F8A0622B249BC51C0026830A /* shared_websockets */,
@@ -187,6 +196,22 @@
 			);
 			name = shared_objc_PluginSolarWebSockets;
 			path = ../shared_objc_PluginSolarWebSockets;
+			sourceTree = "<group>";
+		};
+		F8FD140B249CB22700EB372C /* shared_jetfire */ = {
+			isa = PBXGroup;
+			children = (
+				F8FD140C249CB22700EB372C /* JFRSecurity.h */,
+				F8FD140D249CB22700EB372C /* LICENSE */,
+				F8FD140E249CB22700EB372C /* JFRWebSocket.h */,
+				F8FD140F249CB22700EB372C /* README.md */,
+				F8FD1410249CB22700EB372C /* JFRSecurity.m */,
+				F8FD1411249CB22700EB372C /* CONTRIBUTING.md */,
+				F8FD1412249CB22700EB372C /* JFRWebSocket.m */,
+				F8FD1413249CB22700EB372C /* Jetfire.h */,
+			);
+			name = shared_jetfire;
+			path = ../shared_jetfire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

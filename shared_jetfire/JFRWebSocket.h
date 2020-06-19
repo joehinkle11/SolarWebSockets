@@ -134,7 +134,11 @@
  Set your own custom queue.
  Default setting is dispatch_get_main_queue.
  */
+#if OS_OBJECT_HAVE_OBJC_SUPPORT == 1
 @property(nonatomic, strong, nullable)dispatch_queue_t queue;
+#else
+@property(nonatomic, assign, nullable)dispatch_queue_t queue;
+#endif
 
 /**
  Block property to use on connect.

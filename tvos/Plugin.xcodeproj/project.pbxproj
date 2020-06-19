@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A40A8FE61BD973A8001D2038 /* Corona_plugin_library.framework */ = {
+		A40A8FE61BD973A8001D2038 /* Corona_plugin_solarwebsockets.framework */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A40A8FE91BD973A8001D2038 /* Build configuration list for PBXAggregateTarget "Corona_plugin_library.framework" */;
+			buildConfigurationList = A40A8FE91BD973A8001D2038 /* Build configuration list for PBXAggregateTarget "Corona_plugin_solarwebsockets.framework" */;
 			buildPhases = (
 				A40A8FEC1BD973B8001D2038 /* Build Universal Binary */,
 			);
 			dependencies = (
 				A40A8FEB1BD973B2001D2038 /* PBXTargetDependency */,
 			);
-			name = Corona_plugin_library.framework;
+			name = Corona_plugin_solarwebsockets.framework;
 			productName = Corona_plugin_library.framework;
 		};
 /* End PBXAggregateTarget section */
@@ -47,6 +47,11 @@
 		F8A0621E249B139B0026830A /* PluginSolarWebSockets.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8A0621C249B139B0026830A /* PluginSolarWebSockets.mm */; };
 		F8A06222249B13BE0026830A /* Server.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06220249B13BE0026830A /* Server.c */; };
 		F8A06223249B13BE0026830A /* Server.h in Headers */ = {isa = PBXBuildFile; fileRef = F8A06221249B13BE0026830A /* Server.h */; };
+		F8FD141E249CB3E600EB372C /* JFRSecurity.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD1416249CB3E500EB372C /* JFRSecurity.h */; };
+		F8FD141F249CB3E600EB372C /* JFRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD1418249CB3E500EB372C /* JFRWebSocket.h */; };
+		F8FD1420249CB3E600EB372C /* JFRSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD141A249CB3E500EB372C /* JFRSecurity.m */; };
+		F8FD1421249CB3E600EB372C /* JFRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD141C249CB3E500EB372C /* JFRWebSocket.m */; };
+		F8FD1422249CB3E600EB372C /* Jetfire.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD141D249CB3E500EB372C /* Jetfire.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -76,7 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A49EC1861BD779560093F529 /* Corona_plugin_library.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Corona_plugin_library.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A49EC1861BD779560093F529 /* Corona_plugin_solarwebsockets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Corona_plugin_solarwebsockets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49EC1891BD779560093F529 /* Corona_plugin_library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Corona_plugin_library.h; path = Plugin/Corona_plugin_library.h; sourceTree = "<group>"; };
 		F5815ABF1EE5CC7B0027695F /* CoronaNative.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoronaNative.xcconfig; sourceTree = "<group>"; };
 		F5815AC71EE5D7320027695F /* CoronaCards.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoronaCards.framework; sourceTree = "<group>"; };
@@ -108,6 +113,14 @@
 		F8A0621C249B139B0026830A /* PluginSolarWebSockets.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PluginSolarWebSockets.mm; sourceTree = "<group>"; };
 		F8A06220249B13BE0026830A /* Server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Server.c; sourceTree = "<group>"; };
 		F8A06221249B13BE0026830A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		F8FD1416249CB3E500EB372C /* JFRSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFRSecurity.h; sourceTree = "<group>"; };
+		F8FD1417249CB3E500EB372C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F8FD1418249CB3E500EB372C /* JFRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFRWebSocket.h; sourceTree = "<group>"; };
+		F8FD1419249CB3E500EB372C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F8FD141A249CB3E500EB372C /* JFRSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFRSecurity.m; sourceTree = "<group>"; };
+		F8FD141B249CB3E500EB372C /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		F8FD141C249CB3E500EB372C /* JFRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFRWebSocket.m; sourceTree = "<group>"; };
+		F8FD141D249CB3E500EB372C /* Jetfire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jetfire.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +141,7 @@
 			children = (
 				A49EC1891BD779560093F529 /* Corona_plugin_library.h */,
 				F8A061F2249B126E0026830A /* Info.plist */,
+				F8FD1415249CB3E500EB372C /* shared_jetfire */,
 				F8A0621F249B13BE0026830A /* shared_server */,
 				F8A0621A249B139B0026830A /* shared_objc_PluginSolarWebSockets */,
 				F8A061C8249B12450026830A /* shared_websockets */,
@@ -148,7 +162,7 @@
 		A49EC1871BD779560093F529 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A49EC1861BD779560093F529 /* Corona_plugin_library.framework */,
+				A49EC1861BD779560093F529 /* Corona_plugin_solarwebsockets.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,6 +243,22 @@
 			path = ../shared_server;
 			sourceTree = "<group>";
 		};
+		F8FD1415249CB3E500EB372C /* shared_jetfire */ = {
+			isa = PBXGroup;
+			children = (
+				F8FD1416249CB3E500EB372C /* JFRSecurity.h */,
+				F8FD1417249CB3E500EB372C /* LICENSE */,
+				F8FD1418249CB3E500EB372C /* JFRWebSocket.h */,
+				F8FD1419249CB3E500EB372C /* README.md */,
+				F8FD141A249CB3E500EB372C /* JFRSecurity.m */,
+				F8FD141B249CB3E500EB372C /* CONTRIBUTING.md */,
+				F8FD141C249CB3E500EB372C /* JFRWebSocket.m */,
+				F8FD141D249CB3E500EB372C /* Jetfire.h */,
+			);
+			name = shared_jetfire;
+			path = ../shared_jetfire;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -239,8 +269,11 @@
 				F8A061E0249B12460026830A /* Handshake.h in Headers */,
 				F8A061EB249B12460026830A /* sha1.h in Headers */,
 				F8A061E1249B12460026830A /* Websocket.h in Headers */,
+				F8FD141F249CB3E600EB372C /* JFRWebSocket.h in Headers */,
+				F8FD1422249CB3E600EB372C /* Jetfire.h in Headers */,
 				A49EC18A1BD779560093F529 /* Corona_plugin_library.h in Headers */,
 				F8A061E3249B12460026830A /* md5.h in Headers */,
+				F8FD141E249CB3E600EB372C /* JFRSecurity.h in Headers */,
 				F8A061E2249B12460026830A /* Datastructures.h in Headers */,
 				F8A061EF249B12460026830A /* utf8.h in Headers */,
 				F8A061EA249B12460026830A /* Communicate.h in Headers */,
@@ -254,9 +287,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A49EC1851BD779560093F529 /* Corona_plugin_library */ = {
+		A49EC1851BD779560093F529 /* Corona_plugin_solarwebsockets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A49EC18E1BD779560093F529 /* Build configuration list for PBXNativeTarget "Corona_plugin_library" */;
+			buildConfigurationList = A49EC18E1BD779560093F529 /* Build configuration list for PBXNativeTarget "Corona_plugin_solarwebsockets" */;
 			buildPhases = (
 				C22F67911EE9FA76009D6E9D /* Corona Native */,
 				A49EC1811BD779560093F529 /* Sources */,
@@ -268,9 +301,9 @@
 			);
 			dependencies = (
 			);
-			name = Corona_plugin_library;
+			name = Corona_plugin_solarwebsockets;
 			productName = Corona_plugin_library;
-			productReference = A49EC1861BD779560093F529 /* Corona_plugin_library.framework */;
+			productReference = A49EC1861BD779560093F529 /* Corona_plugin_solarwebsockets.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -303,8 +336,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A49EC1851BD779560093F529 /* Corona_plugin_library */,
-				A40A8FE61BD973A8001D2038 /* Corona_plugin_library.framework */,
+				A49EC1851BD779560093F529 /* Corona_plugin_solarwebsockets */,
+				A40A8FE61BD973A8001D2038 /* Corona_plugin_solarwebsockets.framework */,
 			);
 		};
 /* End PBXProject section */
@@ -348,12 +381,14 @@
 			files = (
 				F8A061E7249B12460026830A /* utf8.c in Sources */,
 				F8A061E8249B12460026830A /* Handshake.c in Sources */,
+				F8FD1420249CB3E600EB372C /* JFRSecurity.m in Sources */,
 				F8A06222249B13BE0026830A /* Server.c in Sources */,
 				F8A061EC249B12460026830A /* b64.c in Sources */,
 				F8A061F0249B12460026830A /* Errors.c in Sources */,
 				F8A0621E249B139B0026830A /* PluginSolarWebSockets.mm in Sources */,
 				F8A061E4249B12460026830A /* sha1.c in Sources */,
 				F8A061ED249B12460026830A /* md5.c in Sources */,
+				F8FD1421249CB3E600EB372C /* JFRWebSocket.m in Sources */,
 				F8A061EE249B12460026830A /* Datastructures.c in Sources */,
 				F8A061DF249B12460026830A /* Communicate.c in Sources */,
 				F8A061E9249B12460026830A /* Websocket.c in Sources */,
@@ -365,7 +400,7 @@
 /* Begin PBXTargetDependency section */
 		A40A8FEB1BD973B2001D2038 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A49EC1851BD779560093F529 /* Corona_plugin_library */;
+			target = A49EC1851BD779560093F529 /* Corona_plugin_solarwebsockets */;
 			targetProxy = A40A8FEA1BD973B2001D2038 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -374,6 +409,8 @@
 		A40A8FE71BD973A8001D2038 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -381,6 +418,8 @@
 		A40A8FE81BD973A8001D2038 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -478,6 +517,7 @@
 		A49EC18F1BD779560093F529 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -495,6 +535,7 @@
 		A49EC1901BD779560093F529 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -512,7 +553,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A40A8FE91BD973A8001D2038 /* Build configuration list for PBXAggregateTarget "Corona_plugin_library.framework" */ = {
+		A40A8FE91BD973A8001D2038 /* Build configuration list for PBXAggregateTarget "Corona_plugin_solarwebsockets.framework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A40A8FE71BD973A8001D2038 /* Debug */,
@@ -530,7 +571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A49EC18E1BD779560093F529 /* Build configuration list for PBXNativeTarget "Corona_plugin_library" */ = {
+		A49EC18E1BD779560093F529 /* Build configuration list for PBXNativeTarget "Corona_plugin_solarwebsockets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A49EC18F1BD779560093F529 /* Debug */,

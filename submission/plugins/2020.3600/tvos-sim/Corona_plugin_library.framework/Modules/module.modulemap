@@ -1,6 +1,0 @@
-framework module Corona_plugin_library {
-  umbrella header "Corona_plugin_library.h"
-
-  export *
-  module * { export * }
-}
