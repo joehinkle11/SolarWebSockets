@@ -34,8 +34,6 @@ local SolarWebSockets = require "plugin.solarwebsockets"
 
 local message = display.newText("debug messages here", 120, 320, nil, 6)
 
--- This event is dispatched to the following Lua function
--- by PluginLibrary::show() in PluginLibrary.mm
 local clients = {}
 local json = require("json")
 local function wsListener( event )
