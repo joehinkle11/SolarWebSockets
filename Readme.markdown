@@ -1,5 +1,6 @@
 # Solar2d WebSockets (Server/Client)
 
+Notice: I'm waiting to get this repository published in the Solar2d Plugin directory (https://plugins.solar2d.com), and so I recommend you wait for it to appear there before trying to use it in my project. It works for me great locally, but I think it's too difficult to integrate it into the Solar simulator before it's available as a public plugin.
 
 ## Overview
 
