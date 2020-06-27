@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F87567CA24A705BB00BA6D78 /* JFRSecurity.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD140C249CB22700EB372C /* JFRSecurity.h */; };
+		F87567CB24A705BF00BA6D78 /* JFRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD140E249CB22700EB372C /* JFRWebSocket.h */; };
+		F87567CC24A705C300BA6D78 /* JFRSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD1410249CB22700EB372C /* JFRSecurity.m */; };
+		F87567CD24A705C700BA6D78 /* JFRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FD1412249CB22700EB372C /* JFRWebSocket.m */; };
+		F87567CE24A705C900BA6D78 /* Jetfire.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FD1413249CB22700EB372C /* Jetfire.h */; };
 		F8A06241249BC51C0026830A /* Server.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A06229249BC51C0026830A /* Server.c */; };
 		F8A06242249BC51C0026830A /* Server.h in Headers */ = {isa = PBXBuildFile; fileRef = F8A0622A249BC51C0026830A /* Server.h */; };
 		F8A06243249BC51C0026830A /* Communicate.c in Sources */ = {isa = PBXBuildFile; fileRef = F8A0622E249BC51C0026830A /* Communicate.c */; };
@@ -50,9 +55,6 @@
 
 /* Begin PBXFileReference section */
 		A4430897164C70D800B9117B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A445A93816ADFC8B00A9A764 /* simulator_plugin_library.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = simulator_plugin_library.lua; path = ../shared/simulator_plugin_library.lua; sourceTree = "<group>"; };
-		A445A93916ADFC8B00A9A764 /* SimulatorPluginLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulatorPluginLibrary.cpp; path = ../shared/SimulatorPluginLibrary.cpp; sourceTree = "<group>"; };
-		A445A93A16ADFC8B00A9A764 /* SimulatorPluginLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulatorPluginLibrary.h; path = ../shared/SimulatorPluginLibrary.h; sourceTree = "<group>"; };
 		A49186401641DDB800A39286 /* plugin_solarwebsockets.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = plugin_solarwebsockets.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5815AB71EE5C6690027695F /* CoronaNative.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CoronaNative.xcconfig; sourceTree = "<group>"; };
 		F8A06229249BC51C0026830A /* Server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Server.c; sourceTree = "<group>"; };
@@ -104,9 +106,6 @@
 		A4151F3316879B8200B2B43A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A445A93816ADFC8B00A9A764 /* simulator_plugin_library.lua */,
-				A445A93916ADFC8B00A9A764 /* SimulatorPluginLibrary.cpp */,
-				A445A93A16ADFC8B00A9A764 /* SimulatorPluginLibrary.h */,
 				F8FD140B249CB22700EB372C /* shared_jetfire */,
 				F8A06256249BC5830026830A /* shared_objc_PluginSolarWebSockets */,
 				F8A06228249BC51C0026830A /* shared_server */,
@@ -224,8 +223,11 @@
 				F8A06245249BC51C0026830A /* Websocket.h in Headers */,
 				F8A0624E249BC51C0026830A /* Communicate.h in Headers */,
 				F8A06246249BC51C0026830A /* Datastructures.h in Headers */,
+				F87567CB24A705BF00BA6D78 /* JFRWebSocket.h in Headers */,
+				F87567CE24A705C900BA6D78 /* Jetfire.h in Headers */,
 				F8A06259249BC5830026830A /* PluginSolarWebSockets.h in Headers */,
 				F8A06253249BC51C0026830A /* utf8.h in Headers */,
+				F87567CA24A705BB00BA6D78 /* JFRSecurity.h in Headers */,
 				F8A0624A249BC51C0026830A /* Errors.h in Headers */,
 				F8A0624F249BC51C0026830A /* sha1.h in Headers */,
 				F8A06247249BC51C0026830A /* md5.h in Headers */,
@@ -325,12 +327,14 @@
 			files = (
 				F8A0624B249BC51C0026830A /* utf8.c in Sources */,
 				F8A06248249BC51C0026830A /* sha1.c in Sources */,
+				F87567CC24A705C300BA6D78 /* JFRSecurity.m in Sources */,
 				F8A0625A249BC5830026830A /* PluginSolarWebSockets.mm in Sources */,
 				F8A06254249BC51C0026830A /* Errors.c in Sources */,
 				F8A06250249BC51C0026830A /* b64.c in Sources */,
 				F8A0624D249BC51C0026830A /* Websocket.c in Sources */,
 				F8A06251249BC51C0026830A /* md5.c in Sources */,
 				F8A06241249BC51C0026830A /* Server.c in Sources */,
+				F87567CD24A705C700BA6D78 /* JFRWebSocket.m in Sources */,
 				F8A06243249BC51C0026830A /* Communicate.c in Sources */,
 				F8A06252249BC51C0026830A /* Datastructures.c in Sources */,
 				F8A0624C249BC51C0026830A /* Handshake.c in Sources */,
@@ -413,6 +417,7 @@
 		A491863E1641DDB800A39286 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -424,6 +429,7 @@
 		A491863F1641DDB800A39286 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

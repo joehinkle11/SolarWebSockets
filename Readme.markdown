@@ -28,6 +28,18 @@ Windows
 
 Documenation
 
+## Add following to your `build.settings` to use:
+
+```lua
+{
+    plugins = {
+        ["plugin.solarwebsockets"] = {
+            publisherId = "io.joehinkle",
+        },
+    },
+}
+```
+
 ## Example Use
 
 ```lua
