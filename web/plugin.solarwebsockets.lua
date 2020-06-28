@@ -14,20 +14,20 @@ local lib = Library:new{ name='solarwebsockets', publisherId='io.joehinkle' }
 -- BEGIN (Insert your implementation starting here)
 -------------------------------------------------------------------------------
 
-local develephantSockets = require("websockets_js")
+local develephantSockets = require("plugin_solarwebsockets_js")
 
 lib.init = function(callback)
   local function WsListener(event)
     event.isClient = true
     event.isServer = false
-    if event.type == ws.ONOPEN then
+    if event.type == develephantSockets.ONOPEN then
       event.name = "join"
-    elseif event.type == ws.ONMESSAGE then
+    elseif event.type == develephantSockets.ONMESSAGE then
       event.name = "message"
       event.message = event.data
-    elseif event.type == ws.ONCLOSE then
+    elseif event.type == develephantSockets.ONCLOSE then
       event.name = "leave"
-    elseif event.type == ws.ONERROR then
+    elseif event.type == develephantSockets.ONERROR then
       event.name = "leave"
       event.errorMessage = event.reason
     end
