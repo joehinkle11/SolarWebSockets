@@ -168,7 +168,6 @@ widget.newButton({
     label = "Connect to Server",
     shape = "rect",
     onRelease = function()
-        -- wss not supported on iOS...yet
         SolarWebSockets.connect("wss://echo.websocket.org")
     end,
     fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
