@@ -4,7 +4,7 @@ Notice: I'm waiting to get this repository published in the Solar2d Plugin direc
 
 ## Overview
 
-I'm made a full websocket client and server plugin for Solar2d.
+I've made a full websocket client and server plugin for Solar2d.
 
 
 ## Support
