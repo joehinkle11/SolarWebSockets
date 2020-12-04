@@ -24,7 +24,7 @@ TLS for servers
 
 Windows
 
-Documenation
+Documentation
 
 ## Add following to your `build.settings` to use:
 
