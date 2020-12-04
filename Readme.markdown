@@ -26,6 +26,10 @@ Windows
 
 Documentation
 
+## Help wanted for Windows
+
+SolarWebSockets supports everything except Windows. I don't have a PC, so if someone feels up to it please contact me, and I can help you add support and get a PR up.
+
 ## Add following to your `build.settings` to use:
 
 ```lua
