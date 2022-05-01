@@ -1,3 +1,4 @@
 [submodule "submission"]
 	path = submission
+	branch = master
 	url = git@github.com:solar2d/io.joehinkle-plugin.solarwebsockets.git
