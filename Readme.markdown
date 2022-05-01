@@ -170,7 +170,7 @@ widget.newButton({
     label = "Connect to Server",
     shape = "rect",
     onRelease = function()
-        SolarWebSockets.connect("wss://echo.websocket.org")
+        SolarWebSockets.connect("wss://echo.websocket.events")
     end,
     fillColor = { default={ 1, 1, 1 }, over={ .2, 0.2, 0.2 } }
  })
